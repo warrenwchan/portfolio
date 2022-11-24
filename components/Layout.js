@@ -8,7 +8,7 @@ const Layout = ({ children }) => (
     </Head>
     <Nav />
     <main className="px-4">
-      <div className="container mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="">{children}</div>
       </div>
     </main>

@@ -4,7 +4,7 @@ export default function Docmument() {
   return (
     <Html>
       <Head />
-      <body className="bg-pink-100 p-8">
+      <body className="bg-[#f2f2f2]">
         <Main />
         <NextScript />
       </body>

@@ -4,10 +4,10 @@ import logo from '../public/logo.svg';
 
 const Nav = () => {
   return (
-    <div className="flex flex-row justify-between items-center px-4 py-2">
+    <div className="flex flex-row justify-between items-center px-8 py-4">
       <div>
         <Link href="/" passHref>
-          <Image src={logo} alt="Logo" />
+          <Image src={logo} alt="Logo" className='w-24' />
         </Link>
       </div>
       <ul className="flex flex-ro gap-x-2">
