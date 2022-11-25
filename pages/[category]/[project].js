@@ -3,7 +3,9 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import { fetcher } from "../../lib/api";
 
-import Carousel from '../../components/Carousel';
+import CarouselBlock from '../../components/image_components/CarouselBlock';
+import ImageBlock from '../../components/image_components/ImageBlock'
+import ImageDescriptionBlock from "../../components/image_components/ImageDescriptionBlock";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
@@ -14,42 +16,41 @@ const Project = ({ projectObject }) => {
         <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
       </div>
       <p className="text-sm leading-relaxed">{project.description}</p>
-      <div className="flex flex-col gap-y-8">
-        {
-          project.blocks.map((block, i) => {
-            if(block.__component === "images.images") {
-              let image = block.image.data.attributes
+      <div className="flex flex-col gap-y-6 my-8">
+        {project.blocks.map((block, i) => {
+          switch (block.__component) {
+            case "images.images":
               return (
-                <div className="p-4" key={i}>
-                  <Image src={`http://localhost:1337${image.url}`} alt={image.alternativeText} width={image.width} height={image.height} />
+                <div className="p-4 bg-gray-50 rounded-lg" key={i}>
+                  <ImageBlock
+                    imageData={block.image.data.attributes}
+                  />
                 </div>
               )
-            } else if (block.__component === "images.image-description") {
-              let image = block.image.data.attributes
+              break;
+            case "images.image-description":
               return (
-                <div className="p-4" key={i}>
-                  <Image src={`http://localhost:1337${image.url}`} alt={image.alternativeText} width={image.width} height={image.height} />
-                  <p className="text-sm">
-                    {block.description}
-                  </p>
+                <div className="p-4 bg-gray-50 rounded-lg" key={i}>
+                  <ImageDescriptionBlock
+                    data={block}
+                  />
                 </div>
               )
-
-            } else if (block.__component === "images.carousel") {
+              break;
+            case "images.carousel":
               let images = block.images.data
               return (
                 <div className="p-4 bg-gray-50 rounded-lg" key={i}>
-                  <Carousel
+                  <CarouselBlock
                     imageData={images}
                   />
                 </div>
               )
-
-            } else {
+              break;
+            default :
               null
-            }
-          })
-        }
+          }
+        })}
       </div>
     </Layout>
   );

@@ -28,7 +28,7 @@ const NextButton = ({ enabled, onClick }) => (
   </button>
 );
 
-const Carousel = ({ imageData }) => {
+const CarouselBlock = ({ imageData }) => {
   const [viewportRef, embla] = useEmblaCarousel({
     loop: false,
     dragFree: true
@@ -91,7 +91,15 @@ const Carousel = ({ imageData }) => {
                   className="embla__slide__parallax"
                   style={{ transform: `translateX(${parallaxValues[index]}%)` }}
                 >
-                  <Image className="embla__slide__img object-cover object-center" src={`http://localhost:1337${image.attributes.url}`} alt={image.attributes.alternativeText} width={image.attributes.width} height={image.attributes.height} />
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={`http://localhost:1337${image.attributes.url}`}
+                      alt={image.attributes.alternativeText}
+                      fill
+                      className="object-cover"
+                      sizes="100%"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -104,6 +112,6 @@ const Carousel = ({ imageData }) => {
   );
 };
 
-export default Carousel;
+export default CarouselBlock;
 
 
