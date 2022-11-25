@@ -6,7 +6,7 @@ const PARALLAX_FACTOR = 1.2;
 
 const PrevButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--prev fill-indigo-400"
+    className="embla__button embla__button--prev fill-indigo-400 hover:fill-indigo-600"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -18,7 +18,7 @@ const PrevButton = ({ enabled, onClick }) => (
 
 const NextButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--next fill-indigo-400"
+    className="embla__button embla__button--next fill-indigo-400 hover:fill-indigo-600"
     onClick={onClick}
     disabled={!enabled}
   >
