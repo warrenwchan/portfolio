@@ -10,7 +10,7 @@ const Home = ({ categories }) => {
         {categories.map((category, i) => {
           return (
             <div key={i}>
-              <Link href={`project/` + category.attributes.slug}>
+              <Link href={category.attributes.slug}>
                 <p className="p-2 rounded hover:bg-gray-200 transition-all ease-in-out duration-200">
                   {category.attributes.name}
                 </p>
