@@ -3,6 +3,8 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import { fetcher } from "../../lib/api";
 
+import Carousel from '../../components/Carousel';
+
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
   return (
@@ -36,17 +38,12 @@ const Project = ({ projectObject }) => {
             } else if (block.__component === "images.carousel") {
               let images = block.images.data
               return (
-                <div className="p-4" key={i}>
-                  {
-                    images.map((image, j) => {
-                      return (
-                        <div className="" key={j}>
-                          <Image src={`http://localhost:1337${image.attributes.url}`} alt={image.attributes.alternativeText} width={image.attributes.width} height={image.attributes.height} />
-                        </div>
-                      )
-                    })
-                  }
-                </div>
+                <>
+                  <Carousel
+                    imageData={images}
+                    key={i}
+                  />
+                </>
               )
 
             } else {
