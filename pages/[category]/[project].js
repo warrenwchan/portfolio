@@ -38,12 +38,11 @@ const Project = ({ projectObject }) => {
             } else if (block.__component === "images.carousel") {
               let images = block.images.data
               return (
-                <>
+                <div className="p-4 bg-gray-50 rounded-lg" key={i}>
                   <Carousel
                     imageData={images}
-                    key={i}
                   />
-                </>
+                </div>
               )
 
             } else {

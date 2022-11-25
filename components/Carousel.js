@@ -28,7 +28,7 @@ const NextButton = ({ enabled, onClick }) => (
   </button>
 );
 
-const Carousel = ({ imageData, key }) => {
+const Carousel = ({ imageData }) => {
   const [viewportRef, embla] = useEmblaCarousel({
     loop: false,
     dragFree: true
@@ -81,9 +81,9 @@ const Carousel = ({ imageData, key }) => {
   }, [embla, onSelect, onScroll]);
 
   return (
-    <div className="embla" key={key}>
+    <div className="embla">
       <div className="embla__viewport" ref={viewportRef}>
-        <div className="embla__container">
+        <div className="embla__container h-[500px]">
           {imageData.map((image, index) => (
             <div className="embla__slide" key={index}>
               <div className="embla__slide__inner">
@@ -91,7 +91,7 @@ const Carousel = ({ imageData, key }) => {
                   className="embla__slide__parallax"
                   style={{ transform: `translateX(${parallaxValues[index]}%)` }}
                 >
-                  <Image className="embla__slide__img" src={`http://localhost:1337${image.attributes.url}`} alt={image.attributes.alternativeText} width={image.attributes.width} height={image.attributes.height} />
+                  <Image className="embla__slide__img object-cover object-center" src={`http://localhost:1337${image.attributes.url}`} alt={image.attributes.alternativeText} width={image.attributes.width} height={image.attributes.height} />
                 </div>
               </div>
             </div>
