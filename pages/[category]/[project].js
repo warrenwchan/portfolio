@@ -3,25 +3,30 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import { fetcher } from "../../lib/api";
 
-import CarouselBlock from '../../components/image_components/CarouselBlock';
-import ImageBlock from '../../components/image_components/ImageBlock'
-import ImageDescriptionBlock from "../../components/image_components/ImageDescriptionBlock";
+
+import CarouselBlock from '../../components/image/CarouselBlock';
+import ImageBlock from '../../components/image/ImageBlock'
+import ImageDescriptionBlock from "../../components/image/ImageDescriptionBlock";
+import SubTitle from "../../components/text/SubTitle";
+import BodyText from "../../components/text/BodyText";
+import RichTextField from "../../components/text/RichTextField";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
+
   return (
     <Layout>
       <div className="mb-8 flex flex-col items-start justify-start gap-2">
         <h1 className="font-bold text-4xl">{project.title}</h1>
         <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
       </div>
-      <p className="text-sm leading-relaxed">{project.description}</p>
-      <div className="flex flex-col gap-y-6 my-8">
+      <p className="leading-normal">{project.description}</p>
+      <div className="flex flex-col gap-y-16 my-8">
         {project.blocks.map((block, i) => {
           switch (block.__component) {
             case "images.images":
               return (
-                <div className="p-4 bg-gray-50 rounded-lg" key={i}>
+                <div key={i}>
                   <ImageBlock
                     imageData={block.image.data.attributes}
                   />
@@ -30,7 +35,7 @@ const Project = ({ projectObject }) => {
               break;
             case "images.image-description":
               return (
-                <div className="p-4 bg-gray-50 rounded-lg" key={i}>
+                <div key={i}>
                   <ImageDescriptionBlock
                     data={block}
                   />
@@ -40,9 +45,36 @@ const Project = ({ projectObject }) => {
             case "images.carousel":
               let images = block.images.data
               return (
-                <div className="p-4 bg-gray-50 rounded-lg" key={i}>
+                <div key={i}>
                   <CarouselBlock
                     imageData={images}
+                  />
+                </div>
+              )
+              break;
+            case "text.sub-title":
+              return (
+                <div key={i}>
+                  <SubTitle
+                    data={block}
+                  />
+                </div>
+              )
+              break;
+            case "text.body":
+              return (
+                <div key={i}>
+                  <BodyText
+                    data={block}
+                  />
+                </div>
+              )
+              break;
+            case "text.rich-text-field":
+              return (
+                <div key={i}>
+                  <RichTextField
+                    data={block}
                   />
                 </div>
               )

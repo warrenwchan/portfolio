@@ -6,7 +6,7 @@ const PARALLAX_FACTOR = 1.2;
 
 const PrevButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--prev fill-indigo-400 hover:fill-indigo-600"
+    className="embla__button embla__button--prev fill-indigo-400 hover:fill-indigo-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all ease-out duration-100"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -18,7 +18,7 @@ const PrevButton = ({ enabled, onClick }) => (
 
 const NextButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--next fill-indigo-400 hover:fill-indigo-600"
+    className="embla__button embla__button--next fill-indigo-400 hover:fill-indigo-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all ease-out duration-100"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -31,7 +31,7 @@ const NextButton = ({ enabled, onClick }) => (
 const CarouselBlock = ({ imageData }) => {
   const [viewportRef, embla] = useEmblaCarousel({
     loop: false,
-    dragFree: true
+    dragFree: true,
   });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
