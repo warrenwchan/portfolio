@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import Layout from "../../components/Layout";
 import { fetcher } from "../../lib/api";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 // Components
 import CarouselBlock from '../../components/image/CarouselBlock';
@@ -18,8 +20,8 @@ const Project = ({ projectObject }) => {
   return (
     <Layout>
       <div className="mb-8 flex flex-col items-start justify-start gap-2">
-        <button type="button" onClick={() => router.back()}>
-          Click here to go back
+        <button className="rounded bg-slate-50 w-8 h-8 hover:text-indigo-600 ease-in-out transition-all duration-200" type="button" onClick={() => router.back()}>
+          <FontAwesomeIcon icon={faArrowLeft} />
         </button>
         <h1 className="font-bold text-4xl">{project.title}</h1>
         <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>

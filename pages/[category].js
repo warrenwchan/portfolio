@@ -3,14 +3,17 @@ import { useRouter } from 'next/router'
 import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
 const Category = ({ categoryObject }) => {
   let projects = categoryObject.attributes.projects.data
   const router = useRouter()
   return (
     <Layout>
-      <button type="button" onClick={() => router.back()}>
-        Click here to go back
-      </button>
+      <button className="rounded bg-slate-50 w-8 h-8 hover:text-indigo-600 ease-in-out transition-all duration-200" type="button" onClick={() => router.back()}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
       <h1 className="font-bold text-4xl mb-8">{categoryObject.attributes.name}</h1>
       <div className="flex flex-col justify-between gap-y-4">
         {
