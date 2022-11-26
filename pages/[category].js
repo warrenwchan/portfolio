@@ -11,23 +11,25 @@ const Category = ({ categoryObject }) => {
   const router = useRouter()
   return (
     <Layout>
-      <button className="rounded bg-slate-50 w-8 h-8 hover:text-indigo-600 ease-in-out transition-all duration-200" type="button" onClick={() => router.back()}>
-          <FontAwesomeIcon icon={faArrowLeft} />
+      <div className="mb-8 flex flex-col items-start justify-start gap-4">
+        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
-      <h1 className="font-bold text-4xl mb-8">{categoryObject.attributes.name}</h1>
-      <div className="flex flex-col justify-between gap-y-4">
-        {
-          projects.map((project, i) => {
-            return (
-              <div className="p-4 rounded border border-gray-200" key={i}>
-                <Link href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}>
-                  <h2 className="font-bold">{project.attributes.title}</h2>
-                  <p>{project.attributes.description}</p>
-                </Link>
-              </div>
-            )
-          })
-        }
+        <h1 className="font-bold text-4xl">{categoryObject.attributes.name}</h1>
+        <div className="flex flex-col justify-between gap-y-4">
+          {
+            projects.map((project, i) => {
+              return (
+                <div className="p-4 rounded border border-gray-200" key={i}>
+                  <Link href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}>
+                    <h2 className="font-bold">{project.attributes.title}</h2>
+                    <p>{project.attributes.description}</p>
+                  </Link>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
     </Layout>
   );

@@ -19,9 +19,9 @@ const Project = ({ projectObject }) => {
   const router = useRouter()
   return (
     <Layout>
-      <div className="mb-8 flex flex-col items-start justify-start gap-2">
-        <button className="rounded bg-slate-50 w-8 h-8 hover:text-indigo-600 ease-in-out transition-all duration-200" type="button" onClick={() => router.back()}>
-          <FontAwesomeIcon icon={faArrowLeft} />
+      <div className="mb-8 flex flex-col items-start justify-start gap-4">
+        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
         <h1 className="font-bold text-4xl">{project.title}</h1>
         <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
