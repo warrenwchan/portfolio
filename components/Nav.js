@@ -19,7 +19,7 @@ const Nav = () => {
     <nav className="p-8 min-w-[420px] min-h-screen h-full sticky top-0 flex flex-col justify-between bg-slate-50/0">
       <div className="flex flex-col gap-y-16">
         <div className="flex flex-col justify-center items-start">
-          <h2 className="font-bold uppercase tracking-wider">Warren Chan</h2>
+          <h2 className="text-xl font-bold uppercase tracking-wider">Warren Chan</h2>
           <p className='text-sm text-slate-600 uppercase tracking-wider mb-2'>Front-end Web Developer ・ UI Designer</p>
           <p className='text-sm text-slate-600 uppercase tracking-wider'>Vancouver, BC</p>
         </div>
@@ -40,7 +40,7 @@ const Nav = () => {
         </div>
         <div className="flex flex-col items-start gap-y-2">
           <p className="text-2xl font-bold">Links</p>
-          <Link href={`/`} className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-indigo-500 transition-all duration-500 ease-in-out ${router.query.category === "resume" ? "text-indigo-400 font-medium" : null}`}>Resume</Link>
+          <Link href={`/resume`} className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-indigo-500 transition-all duration-500 ease-in-out ${router.route === "/resume" ? "text-indigo-400 font-medium" : null}`}>Resume</Link>
         </div>
       </div>
 

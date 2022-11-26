@@ -37,7 +37,6 @@ const Category = ({ categoryObject }) => {
 
 export async function getServerSideProps({ params }) {
   const { category } = params;
-  console.log(category)
   const categoryResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/category/${category}?populate=projects`);
   return {
     props: {
