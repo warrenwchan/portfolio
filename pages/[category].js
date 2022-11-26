@@ -1,12 +1,16 @@
 import Link from "next/link";
+import { useRouter } from 'next/router'
 import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
 
 const Category = ({ categoryObject }) => {
   let projects = categoryObject.attributes.projects.data
-
+  const router = useRouter()
   return (
     <Layout>
+      <button type="button" onClick={() => router.back()}>
+        Click here to go back
+      </button>
       <h1 className="font-bold text-4xl mb-8">{categoryObject.attributes.name}</h1>
       <div className="flex flex-col justify-between gap-y-4">
         {
