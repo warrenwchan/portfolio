@@ -22,7 +22,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
   }, [])
 
   return (
-    <nav className={`p-4 py-8 md:p-8 md:h-full sticky top-0 flex flex-col justify-between bg-white ${menuState ? "min-h-screen h-full w-1/5 min-w-[420px] shadow-xl lg:shadow-none" : null} transition-all ease-out duration-100`}>
+    <nav className={`p-4 py-8 md:p-8 md:h-full sticky top-0 flex flex-col justify-between bg-white ${menuState ? "min-h-screen h-full md:w-1/5 md:min-w-[420px] shadow-xl lg:shadow-none" : null} transition-all ease-out duration-100`}>
       <div className="flex flex-row justify-between items-center w-full">
         <Link href="/" onClick={closeMenu} className="flex flex-row justify-center items-center gap-1">
           <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2 md:hidden"/>
