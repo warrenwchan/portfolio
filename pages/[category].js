@@ -19,13 +19,13 @@ const Category = ({ categoryObject }) => {
 
   return (
     <Layout>
-      <div className="max-w-5xl w-1/2 mx-auto flex flex-col gap-y-16 my-[20vh]">
+      <div className="w-full md:max-w-5xl md:w-1/2 mx-auto flex flex-col gap-y-16 my-[10vh] md:my-[20vh]">
 
-          <div className="mb-8 flex flex-col items-start justify-start gap-8">
+          <div className="flex flex-col items-start justify-start gap-8">
             <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
               <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
             </button>
-            <h1 className="font-bold text-6xl">{categoryObject.attributes.name}</h1>
+            <h1 className="font-bold text-5xl md:text-6xl">{categoryObject.attributes.name}</h1>
           </div>
 
           <div className="grid grid-cols-1 divide-y divide-slate-200">
@@ -33,7 +33,7 @@ const Category = ({ categoryObject }) => {
               projects.length ?
               projects.map((project, i) => {
                 return (
-                  <div key={i} className="p-8 group hover:bg-gray-100 transition-all duration-200 ease-out">
+                  <div key={i} className="py-8 group transition-all duration-200 ease-out">
                     <Link
                       href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}
                     >

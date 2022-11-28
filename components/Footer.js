@@ -4,10 +4,10 @@ import logo from '../public/wc-logo-black.svg';
 
 import bmcLogo from '../public/bmc-logo.png'
 
-const Footer = () => {
+const Footer = ({ menuState, handleMenuState }) => {
   return (
     <div className='flex flex-row justify-between items-center'>
-      <Link href="/" passHref>
+      <Link href="/" passHref onClick={handleMenuState}>
         <Image src={logo} alt="Logo" className='w-24' />
       </Link>
       <a href="https://www.buymeacoffee.com/warrenwchan" target="_blank" rel="noreferrer" >
