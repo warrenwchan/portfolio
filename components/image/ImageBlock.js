@@ -9,7 +9,7 @@ const ImageBlock = ({ imageData }) => {
   return (
     <div className="relative w-full">
       <Image
-        src={`http://localhost:1337${imageData.url}`}
+        src={imageData.url}
         alt={imageData.alternativeText}
         width={1080}
         height={1080}
@@ -29,7 +29,7 @@ const ImageBlock = ({ imageData }) => {
             return (
               <div style={{ position: "relative", width, height }}>
                 <Image
-                  src={`http://localhost:1337${imageData.url}`}
+                  src={imageData.url}
                   alt={imageData.alternativeText}
                   width={1080}
                   height={1080}

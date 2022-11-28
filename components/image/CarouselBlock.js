@@ -112,7 +112,7 @@ const CarouselBlock = ({ imageData }) => {
                   >
                     <div className="relative w-full h-full">
                       <Image
-                        src={`http://localhost:1337${image.attributes.url}`}
+                        src={image.attributes.url}
                         alt={image.attributes.alternativeText}
                         fill
                         className="object-cover hover:cursor-pointer"
@@ -143,7 +143,7 @@ const CarouselBlock = ({ imageData }) => {
               return (
                 <div style={{ position: "relative", width, height }}>
                   <Image
-                    src={`http://localhost:1337${image}`}
+                    src={image}
                     alt={""}
                     width={1080}
                     height={1080}

@@ -55,7 +55,7 @@ const Project = ({ projectObject }) => {
             break;
           case "images.carousel":
             let images = block.images.data
-            if(block.image.data) {
+            if(images) {
               return (
                 <div key={i}>
                   <CarouselBlock
