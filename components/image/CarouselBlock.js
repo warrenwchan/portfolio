@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import Image from "next/image";
 
 const PARALLAX_FACTOR = 1.2;
@@ -29,13 +30,18 @@ const NextButton = ({ enabled, onClick }) => (
 );
 
 const CarouselBlock = ({ imageData }) => {
+  const wheelGestures = WheelGesturesPlugin({
+    wheelDraggingClass: 'my-wheel-class',
+  })
+
   const [viewportRef, embla] = useEmblaCarousel({
     loop: false,
     dragFree: true,
-  });
+  }, [wheelGestures]);
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
   const [parallaxValues, setParallaxValues] = useState([]);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
   const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
@@ -68,8 +74,11 @@ const CarouselBlock = ({ imageData }) => {
       }
       return diffToTarget * (-1 / PARALLAX_FACTOR) * 100;
     });
+    const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+    setScrollProgress(progress * 100);
+
     setParallaxValues(styles);
-  }, [embla, setParallaxValues]);
+  }, [embla, setParallaxValues, setScrollProgress]);
 
   useEffect(() => {
     if (!embla) return;
@@ -81,33 +90,41 @@ const CarouselBlock = ({ imageData }) => {
   }, [embla, onSelect, onScroll]);
 
   return (
-    <div className="embla">
-      <div className="embla__viewport" ref={viewportRef}>
-        <div className="embla__container h-[500px]">
-          {imageData.map((image, index) => (
-            <div className="embla__slide" key={index}>
-              <div className="embla__slide__inner">
-                <div
-                  className="embla__slide__parallax"
-                  style={{ transform: `translateX(${parallaxValues[index]}%)` }}
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={`http://localhost:1337${image.attributes.url}`}
-                      alt={image.attributes.alternativeText}
-                      fill
-                      className="object-cover"
-                      sizes="100%"
-                    />
+    <div className="">
+      <div className="embla">
+        <div className="embla__viewport" ref={viewportRef}>
+          <div className="embla__container aspect-video">
+            {imageData.map((image, index) => (
+              <div className="embla__slide" key={index}>
+                <div className="embla__slide__inner">
+                  <div
+                    className="embla__slide__parallax"
+                    style={{ transform: `translateX(${parallaxValues[index]}%)` }}
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={`http://localhost:1337${image.attributes.url}`}
+                        alt={image.attributes.alternativeText}
+                        fill
+                        className="object-cover"
+                        sizes="100%"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+        <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
-      <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-      <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+      <div className="embla__progress bg-slate-200">
+        <div
+          className="embla__progress__bar bg-indigo-400"
+          style={{ transform: `translateX(${scrollProgress}%)` }}
+        />
+      </div>
     </div>
   );
 };

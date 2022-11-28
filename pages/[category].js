@@ -2,34 +2,50 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
+import useSWR from "swr";
+import { useState } from "react";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 const Category = ({ categoryObject }) => {
+  const [pageIndex, setPageIndex] = useState(1)
   let projects = categoryObject.attributes.projects.data
   const router = useRouter()
+  const {data} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?pagination[page]=${pageIndex}&pagination[pageSize]=4`, fetcher, {
+    fallbackData: categoryObject
+  })
+
   return (
     <Layout>
-      <div className="mb-8 flex flex-col items-start justify-start gap-4">
-        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
-          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
-        </button>
-        <h1 className="font-bold text-4xl">{categoryObject.attributes.name}</h1>
-        <div className="flex flex-col justify-between gap-y-4">
-          {
-            projects.map((project, i) => {
-              return (
-                <div className="p-4 rounded border border-gray-200" key={i}>
-                  <Link href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}>
-                    <h2 className="font-bold">{project.attributes.title}</h2>
-                    <p>{project.attributes.description}</p>
-                  </Link>
-                </div>
-              )
-            })
-          }
-        </div>
+      <div className="max-w-5xl w-1/2 mx-auto flex flex-col gap-y-16 my-[20vh]">
+
+          <div className="mb-8 flex flex-col items-start justify-start gap-8">
+            <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+              <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+            </button>
+            <h1 className="font-bold text-6xl">{categoryObject.attributes.name}</h1>
+          </div>
+
+          <div className="grid grid-cols-1 divide-y divide-slate-200">
+            {
+              projects.length ?
+              projects.map((project, i) => {
+                return (
+                  <div key={i} className="p-8 group hover:bg-gray-100 transition-all duration-200 ease-out">
+                    <Link
+                      href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}
+                    >
+                      <h2 className="text-2xl font-bold mb-4 group-hover:text-indigo-500">{project.attributes.title} <FontAwesomeIcon icon={faArrowRight} className="scale-75 transition transform opacity-0 -translate-x-4 group-hover:-translate-x-0 group-hover:opacity-100" /></h2>
+                      <p className="text-slate-600 leading-normal">{project.attributes.description}</p>
+                    </Link>
+                  </div>
+                )
+              })
+              : <p className="text-slate-400">No {categoryObject.attributes.name} Projects Available At The Moment...</p>
+            }
+          </div>
       </div>
     </Layout>
   );

@@ -19,15 +19,15 @@ const Project = ({ projectObject }) => {
   const router = useRouter()
   return (
     <Layout>
-      <div className="mb-8 flex flex-col items-start justify-start gap-4">
-        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
-          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
-        </button>
-        <h1 className="font-bold text-4xl">{project.title}</h1>
-        <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
-      </div>
-      <p className="leading-normal">{project.description}</p>
-      <div className="flex flex-col gap-y-16 my-8">
+      <div className="max-w-5xl w-3/4 mx-auto flex flex-col gap-y-64 my-[20vh]">
+        <div className="mb-8 flex flex-col items-start justify-start gap-8">
+          <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+            <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+          </button>
+          <h1 className="font-bold text-6xl">{project.title}</h1>
+          <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
+          <p className="leading-normal">{project.description}</p>
+        </div>
         {project.blocks.map((block, i) => {
           switch (block.__component) {
             case "images.images":
@@ -89,6 +89,11 @@ const Project = ({ projectObject }) => {
               null
           }
         })}
+        <div className="mb-8 flex flex-col items-start justify-start gap-8">
+          <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+            <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+          </button>
+        </div>
       </div>
     </Layout>
   );
