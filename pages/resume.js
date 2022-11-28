@@ -1,24 +1,39 @@
-import Image from "next/image";
 import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
+import { useState } from 'react';
+import { Document, Page } from 'react-pdf';
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+
 
 const Resume = ({ resumeObject }) => {
+  const [ numPage, setNumPage ] = useState(null);
+  const [ pageNumber, setPageNumber ] = useState(1);
+
   let resume = resumeObject.attributes.resume.data[0].attributes
   let resumeURL = `http://localhost:1337${resume.url}`
-  console.log(resumeURL)
-  console.log(resume)
+
+  const onDocumentLoadSuccess = ({numPage}) => {
+    setNumPage(numPage);
+    setPageNumber(1);
+  }
 
 
   return (
     <Layout>
-      <div className="w-full h-full">
-        <Image
-          src={resumeURL}
-          alt={resume.alternativeText}
-          width={595}
-          height={842}
-          className="object-cover mx-auto shadow-lg"
-        />
+      <div className="max-w-5xl w-full h-full mx-auto">
+        <Document
+          file={resumeURL}
+          onLoadSuccess={onDocumentLoadSuccess}
+          onLoadError={console.error}
+          className="mx-auto"
+        >
+          <Page
+            pageNumber={pageNumber}
+            className="mx-auto w-full"
+          />
+        </Document>
       </div>
     </Layout>
   )
