@@ -20,7 +20,7 @@ const Category = ({ categoryObject }) => {
   return (
     <Layout>
       <div className="flex flex-col items-start justify-start gap-8">
-        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+        <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
         <h1 className="font-bold text-5xl md:text-6xl">{categoryObject.attributes.name}</h1>
@@ -34,7 +34,7 @@ const Category = ({ categoryObject }) => {
                 <Link
                   href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}
                 >
-                  <h2 className="text-2xl font-bold mb-4 group-hover:text-indigo-500">{project.attributes.title} <FontAwesomeIcon icon={faArrowRight} className="scale-75 transition transform opacity-0 -translate-x-4 group-hover:-translate-x-0 group-hover:opacity-100" /></h2>
+                  <h2 className="text-2xl font-bold mb-4 group-hover:text-acapulco-500">{project.attributes.title} <FontAwesomeIcon icon={faArrowRight} className="scale-75 transition transform opacity-0 -translate-x-4 group-hover:-translate-x-0 group-hover:opacity-100" /></h2>
                   <p className="text-slate-600 leading-normal">{project.attributes.description}</p>
                 </Link>
               </div>

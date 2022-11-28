@@ -20,7 +20,7 @@ const Project = ({ projectObject }) => {
   return (
     <Layout>
       <div className="flex flex-col items-start justify-start gap-8">
-        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+        <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
         <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
@@ -89,7 +89,7 @@ const Project = ({ projectObject }) => {
         }
       })}
       <div className="mb-8 flex flex-col items-start justify-start gap-8">
-        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+        <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
       </div>

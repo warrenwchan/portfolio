@@ -47,8 +47,8 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
         </div>
         <div className="flex flex-col items-start gap-y-2">
           <p className="text-2xl font-bold mb-4">Links</p>
-          <Link href={`/`} className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm hover:font-medium hover:text-indigo-500 transition-all duration-500 ease-in-out ${router.route === "/" ? "text-indigo-400 font-medium" : null}`}>Home</Link>
-          {/* <Link href={`/resume`} className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-indigo-500 transition-all duration-500 ease-in-out ${router.route === "/resume" ? "text-indigo-400 font-medium" : null}`}>Resume</Link> */}
+          <Link href={`/`} className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${router.route === "/" ? "text-acapulco-600 font-medium" : null}`}>Home</Link>
+          {/* <Link href={`/resume`} className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${router.route === "/resume" ? "text-acapulco-400 font-medium" : null}`}>Resume</Link> */}
         </div>
         <div className="flex flex-col items-start gap-y-2">
           <p className="text-2xl font-bold mb-4">Projects</p>
@@ -59,7 +59,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
                 <Link
                   href={`/${category.attributes.slug}`}
                   key={i}
-                  className={`flex flex-row gap-x-2 pb-2 text-slate-600 text-sm hover:font-medium hover:text-indigo-500 transition-all duration-500 ease-in-out ${category.attributes.slug === router.query.category ? "text-indigo-400 font-medium" : null}`}
+                  className={`flex flex-row gap-x-2 pb-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${category.attributes.slug === router.query.category ? "text-acapulco-600 font-medium" : null}`}
                   onClick={handleMenuState}
                 >
                   <span>{category.id.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}</span>

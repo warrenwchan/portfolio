@@ -10,7 +10,7 @@ const PARALLAX_FACTOR = 1.2;
 
 const PrevButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--prev fill-indigo-400 hover:fill-indigo-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all ease-out duration-100"
+    className="embla__button embla__button--prev fill-acapulco-400 hover:fill-acapulco-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all ease-out duration-100"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -22,7 +22,7 @@ const PrevButton = ({ enabled, onClick }) => (
 
 const NextButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--next fill-indigo-400 hover:fill-indigo-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all ease-out duration-100"
+    className="embla__button embla__button--next fill-acapulco-400 hover:fill-acapulco-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all ease-out duration-100"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -157,7 +157,7 @@ const CarouselBlock = ({ imageData }) => {
       </div>
       <div className="embla__progress bg-slate-200">
         <div
-          className="embla__progress__bar bg-indigo-400"
+          className="embla__progress__bar bg-acapulco-400"
           style={{ transform: `translateX(${scrollProgress}%)` }}
         />
       </div>
