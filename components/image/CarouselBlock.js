@@ -100,7 +100,7 @@ const CarouselBlock = ({ imageData }) => {
 
   return (
     <div>
-      <div className="embla">
+      <div className="embla bg-slate-100 p-4 rounded">
         <div className="embla__viewport" ref={viewportRef}>
           <div className="embla__container aspect-video">
             {imageData.map((image, index) => (
