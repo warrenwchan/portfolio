@@ -16,6 +16,7 @@ import RichTextField from "../../components/text/RichTextField";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
+  console.log(project)
   const router = useRouter()
   return (
     <Layout>
@@ -28,34 +29,41 @@ const Project = ({ projectObject }) => {
         <p className="leading-normal">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {
+        console.log(block)
         switch (block.__component) {
           case "images.images":
-            return (
-              <div key={i}>
-                <ImageBlock
-                  imageData={block.image.data.attributes}
-                />
-              </div>
-            )
+            if(block.image.data) {
+              return (
+                <div key={i}>
+                  <ImageBlock
+                    imageData={block.image.data.attributes}
+                  />
+                </div>
+              )
+            }
             break;
           case "images.image-description":
-            return (
-              <div key={i}>
-                <ImageDescriptionBlock
-                  data={block}
-                />
-              </div>
-            )
+            if(block.image.data) {
+              return (
+                <div key={i}>
+                  <ImageDescriptionBlock
+                    data={block}
+                  />
+                </div>
+              )
+            }
             break;
           case "images.carousel":
             let images = block.images.data
-            return (
-              <div key={i}>
-                <CarouselBlock
-                  imageData={images}
-                />
-              </div>
-            )
+            if(block.image.data) {
+              return (
+                <div key={i}>
+                  <CarouselBlock
+                    imageData={images}
+                  />
+                </div>
+              )
+            }
             break;
           case "text.sub-title":
             return (
