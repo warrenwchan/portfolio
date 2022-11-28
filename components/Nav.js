@@ -22,7 +22,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
   }, [])
 
   return (
-    <nav className={`p-4 py-8 md:p-8 sticky top-0 flex flex-col bg-slate-50/0 ${menuState ? "min-h-screen h-full" : null} transition-all ease-out duration-100`}>
+    <nav className={`p-4 py-8 md:p-8 md:h-full sticky top-0 flex flex-col justify-between bg-white ${menuState ? "min-h-screen h-full w-1/5 min-w-[420px] shadow-xl" : null} transition-all ease-out duration-100`}>
       <div className="flex flex-row justify-between items-center w-full">
         <Link href="/" onClick={closeMenu} className="flex flex-row justify-center items-center gap-1">
           <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2 md:hidden"/>
@@ -32,7 +32,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
             : null
           }
         </Link>
-        <button className='w-8 h-8 md:hidden' onClick={handleMenuState}>
+        <button className='w-8 h-8 lg:hidden' onClick={handleMenuState}>
         {
           menuState
           ? <FontAwesomeIcon icon={faTimes} className="transition transform" />
@@ -77,6 +77,9 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
           handleMenuState={handleMenuState}
         />
         <Image src={gradientBlur} alt="gradient blur asset" className="absolute -bottom-16 -left-16 rotate-180 opacity-40 scale-125 -z-10" />
+      </div>
+      <div className={`hidden lg:hidden ${menuState ? "hidden" : "md:block"}`}>
+        <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2"/>
       </div>
     </nav>
   )
