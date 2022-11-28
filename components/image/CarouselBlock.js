@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import Image from "next/image";
+import Lightbox from "yet-another-react-lightbox";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import "yet-another-react-lightbox/styles.css";
 
 const PARALLAX_FACTOR = 1.2;
 
@@ -30,6 +33,8 @@ const NextButton = ({ enabled, onClick }) => (
 );
 
 const CarouselBlock = ({ imageData }) => {
+  const [open, setOpen] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
   const wheelGestures = WheelGesturesPlugin({
     wheelDraggingClass: 'my-wheel-class',
   })
@@ -89,8 +94,12 @@ const CarouselBlock = ({ imageData }) => {
     embla.on("resize", onScroll);
   }, [embla, onSelect, onScroll]);
 
+  const images = imageData.map((image) => {
+    return image.attributes.url
+  })
+
   return (
-    <div className="">
+    <div>
       <div className="embla">
         <div className="embla__viewport" ref={viewportRef}>
           <div className="embla__container aspect-video">
@@ -106,8 +115,9 @@ const CarouselBlock = ({ imageData }) => {
                         src={`http://localhost:1337${image.attributes.url}`}
                         alt={image.attributes.alternativeText}
                         fill
-                        className="object-cover"
+                        className="object-cover hover:cursor-pointer"
                         sizes="100%"
+                        onClick={() => (setOpen(true), setImageIndex(index))}
                       />
                     </div>
                   </div>
@@ -118,6 +128,32 @@ const CarouselBlock = ({ imageData }) => {
         </div>
         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+
+        <Lightbox
+          open={open}
+          close={() => setOpen(false)}
+          slides={images}
+          index={imageIndex}
+          plugins={[Fullscreen]}
+          styles={{ container: { backgroundColor: "rgba(0, 0, 0, .9)" } }}
+          render={{
+            slide: (image, offset, rect) => {
+              const width = Math.round(Math.min(rect.width, (rect.height / image.height) * image.width));
+              const height = Math.round(Math.min(rect.height, (rect.width / image.width) * image.height));
+              return (
+                <div style={{ position: "relative", width, height }}>
+                  <Image
+                    src={`http://localhost:1337${image}`}
+                    alt={""}
+                    width={1080}
+                    height={1080}
+                    className='object-cover'
+                  />
+                </div>
+              );
+            }
+          }}
+        />
       </div>
       <div className="embla__progress bg-slate-200">
         <div
