@@ -16,7 +16,6 @@ import RichTextField from "../../components/text/RichTextField";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
-  console.log(project)
   const router = useRouter()
   return (
     <Layout>
