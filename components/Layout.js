@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   }
 
   useEffect(()=> {
-    window.innerWidth > 1024 ? setMenuState(true) : null
+    window.innerWidth >= 1024 ? setMenuState(true) : null
     window.addEventListener('resize', ()=> {
       window.innerWidth < 1024 ? setMenuState(false) : setMenuState(true)
     })
@@ -34,8 +34,10 @@ const Layout = ({ children }) => {
             handleMenuState={handleMenuState}
           />
         </div>
-        <div className='w-full lg:w-4/5 h-full p-4 md:pr-0 overflow-y-scroll overflow-x-hidden bg-slate-50 md:p-24'>
-          {children}
+        <div className='w-full lg:w-4/5 h-full p-4 md:p-8 xl:pr-0 overflow-y-scroll overflow-x-hidden bg-slate-50 md:ml-24 lg:ml-0'>
+          <div className="w-full lg:max-w-5xl mx-auto flex flex-col gap-y-32 my-[10vh] md:my-[20vh]">
+            {children}
+          </div>
         </div>
       </main>
     </>

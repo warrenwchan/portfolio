@@ -19,81 +19,79 @@ const Project = ({ projectObject }) => {
   const router = useRouter()
   return (
     <Layout>
-      <div className="w-full md:max-w-5xl md:w-1/2 mx-auto flex flex-col gap-y-20 my-[10vh] md:my-[20vh]">
-        <div className="flex flex-col items-start justify-start gap-8">
-          <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
-            <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
-          </button>
-          <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
-          <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
-          <p className="leading-normal">{project.description}</p>
-        </div>
-        {project.blocks.map((block, i) => {
-          switch (block.__component) {
-            case "images.images":
-              return (
-                <div key={i}>
-                  <ImageBlock
-                    imageData={block.image.data.attributes}
-                  />
-                </div>
-              )
-              break;
-            case "images.image-description":
-              return (
-                <div key={i}>
-                  <ImageDescriptionBlock
-                    data={block}
-                  />
-                </div>
-              )
-              break;
-            case "images.carousel":
-              let images = block.images.data
-              return (
-                <div key={i}>
-                  <CarouselBlock
-                    imageData={images}
-                  />
-                </div>
-              )
-              break;
-            case "text.sub-title":
-              return (
-                <div key={i}>
-                  <SubTitle
-                    data={block}
-                  />
-                </div>
-              )
-              break;
-            case "text.body":
-              return (
-                <div key={i}>
-                  <BodyText
-                    data={block}
-                  />
-                </div>
-              )
-              break;
-            case "text.rich-text-field":
-              return (
-                <div key={i}>
-                  <RichTextField
-                    data={block}
-                  />
-                </div>
-              )
-              break;
-            default :
-              null
-          }
-        })}
-        <div className="mb-8 flex flex-col items-start justify-start gap-8">
-          <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
-            <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
-          </button>
-        </div>
+      <div className="flex flex-col items-start justify-start gap-8">
+        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+        </button>
+        <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
+        <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
+        <p className="leading-normal">{project.description}</p>
+      </div>
+      {project.blocks.map((block, i) => {
+        switch (block.__component) {
+          case "images.images":
+            return (
+              <div key={i}>
+                <ImageBlock
+                  imageData={block.image.data.attributes}
+                />
+              </div>
+            )
+            break;
+          case "images.image-description":
+            return (
+              <div key={i}>
+                <ImageDescriptionBlock
+                  data={block}
+                />
+              </div>
+            )
+            break;
+          case "images.carousel":
+            let images = block.images.data
+            return (
+              <div key={i}>
+                <CarouselBlock
+                  imageData={images}
+                />
+              </div>
+            )
+            break;
+          case "text.sub-title":
+            return (
+              <div key={i}>
+                <SubTitle
+                  data={block}
+                />
+              </div>
+            )
+            break;
+          case "text.body":
+            return (
+              <div key={i}>
+                <BodyText
+                  data={block}
+                />
+              </div>
+            )
+            break;
+          case "text.rich-text-field":
+            return (
+              <div key={i}>
+                <RichTextField
+                  data={block}
+                />
+              </div>
+            )
+            break;
+          default :
+            null
+        }
+      })}
+      <div className="mb-8 flex flex-col items-start justify-start gap-8">
+        <button className="hover:text-indigo-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
+          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+        </button>
       </div>
     </Layout>
   );
