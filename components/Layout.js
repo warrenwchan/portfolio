@@ -7,7 +7,9 @@ const Layout = ({ children }) => {
   const [menuState, setMenuState] = useState(false)
 
   const handleMenuState = () => {
-    return setMenuState(!menuState)
+    if(window.innerWidth < 1024) {
+      return setMenuState(!menuState)
+    }
   }
 
   const closeMenu = () => {
