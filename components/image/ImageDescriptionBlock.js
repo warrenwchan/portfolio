@@ -7,7 +7,7 @@ const ImageDescriptionBlock = ({ data }) => {
       <ImageBlock
         imageData={image}
       />
-      <p className="leading-normal">
+      <p className="leading-normal px-4 text-center text-sm text-slate-600">
         {data.description}
       </p>
     </div>

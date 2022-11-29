@@ -30,7 +30,7 @@ const Project = ({ projectObject }) => {
         </button>
         <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
         <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-acapulco-400 text-xs text-acapulco-500">{project.category.data.attributes.name}</span>
-        <p className="leading-normal">{project.description}</p>
+        <p className="leading-normal px-4">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {
         switch (block.__component) {

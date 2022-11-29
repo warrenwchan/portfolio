@@ -5,7 +5,7 @@ const RichTextField = ({ data }) => {
   const htmlContent = md.render(data.rich_text_field);
 
   return (
-    <section className='flex flex-col gap-y-2 leading-normal' dangerouslySetInnerHTML={{__html: htmlContent}}></section>
+    <section className='flex flex-col gap-y-2 leading-normal px-4' dangerouslySetInnerHTML={{__html: htmlContent}}></section>
   )
 }
 

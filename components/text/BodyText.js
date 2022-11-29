@@ -1,6 +1,6 @@
 const BodyText = ({ data }) => {
   return (
-    <p className="leading-normal">
+    <p className="leading-normal px-4">
       {data.body_text}
     </p>
   )
