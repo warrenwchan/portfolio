@@ -113,7 +113,7 @@ const CarouselBlock = ({ imageData }) => {
                     <div className="relative w-full h-full">
                       <Image
                         src={image.attributes.url}
-                        alt={image.attributes.alternativeText}
+                        alt={image.attributes.alternativeText ? image.attributes.alternativeText : image.attributes.name}
                         fill
                         className="object-cover hover:cursor-pointer"
                         sizes="100%"

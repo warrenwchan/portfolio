@@ -13,7 +13,7 @@ const Category = ({ categoryObject }) => {
   const [pageIndex, setPageIndex] = useState(1)
   let projects = categoryObject.attributes.projects.data
   const router = useRouter()
-  const {data} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?pagination[page]=${pageIndex}&pagination[pageSize]=4`, fetcher, {
+  const {data} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/categories?pagination[page]=${pageIndex}&pagination[pageSize]=4`, fetcher, {
     fallbackData: categoryObject
   })
 
@@ -49,7 +49,7 @@ const Category = ({ categoryObject }) => {
 
 export async function getServerSideProps({ params }) {
   const { category } = params;
-  const categoryResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/category/${category}?populate=projects`);
+  const categoryResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/slugify/slugs/category/${category}?populate=projects`);
   return {
     props: {
       categoryObject: categoryResponse.data

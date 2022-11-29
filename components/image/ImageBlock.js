@@ -10,7 +10,7 @@ const ImageBlock = ({ imageData }) => {
     <div className="relative w-full">
       <Image
         src={imageData.url}
-        alt={imageData.alternativeText}
+        alt={imageData.alternativeText ? imageData.alternativeText : imageData.name}
         width={1080}
         height={1080}
         className='object-cover hover:cursor-pointer'
@@ -30,7 +30,7 @@ const ImageBlock = ({ imageData }) => {
               <div style={{ position: "relative", width, height }}>
                 <Image
                   src={imageData.url}
-                  alt={imageData.alternativeText}
+                  alt={imageData.alternativeText ? imageData.alternativeText : imageData.name}
                   width={1080}
                   height={1080}
                   className='object-cover'

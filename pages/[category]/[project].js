@@ -13,6 +13,7 @@ import ImageDescriptionBlock from "../../components/image/ImageDescriptionBlock"
 import SubTitle from "../../components/text/SubTitle";
 import BodyText from "../../components/text/BodyText";
 import RichTextField from "../../components/text/RichTextField";
+import PhotoGrid from "../../components/image/PhotoGrid";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
@@ -28,7 +29,6 @@ const Project = ({ projectObject }) => {
         <p className="leading-normal">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {
-        console.log(block)
         switch (block.__component) {
           case "images.images":
             if(block.image.data) {
@@ -53,11 +53,23 @@ const Project = ({ projectObject }) => {
             }
             break;
           case "images.carousel":
-            let images = block.images.data
+            var images = block.images.data
             if(images) {
               return (
                 <div key={i}>
                   <CarouselBlock
+                    imageData={images}
+                  />
+                </div>
+              )
+            }
+            break;
+          case "images.photo-grid":
+            var images = block.images.data
+            if(images) {
+              return (
+                <div key={i}>
+                  <PhotoGrid
                     imageData={images}
                   />
                 </div>
@@ -106,7 +118,7 @@ const Project = ({ projectObject }) => {
 
 export async function getServerSideProps({ params }) {
   const { project } = params;
-  const projectResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/project/${project}?populate[blocks][populate]=*&populate[category][populate]=*`);
+  const projectResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/slugify/slugs/project/${project}?populate[blocks][populate]=*&populate[category][populate]=*`);
   return {
     props: {
       projectObject: projectResponse.data
