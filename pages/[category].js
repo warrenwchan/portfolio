@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from 'next/router'
 import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
@@ -8,6 +9,8 @@ import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
+import placeholderIcon from '../public/placeholder-icon.png'
 
 const Category = ({ categoryObject }) => {
   const [pageIndex, setPageIndex] = useState(1)
@@ -36,8 +39,21 @@ const Category = ({ categoryObject }) => {
                 <Link
                   href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}
                 >
-                  <h2 className="text-2xl font-bold mb-4 group-hover:text-acapulco-500">{project.attributes.title} <FontAwesomeIcon icon={faArrowRight} className="scale-75 transition transform opacity-0 -translate-x-4 group-hover:-translate-x-0 group-hover:opacity-100" /></h2>
-                  <p className="text-slate-600 leading-normal">{project.attributes.description}</p>
+                  <div className="flex flex-row gap-x-4">
+                    <div className="relative flex-none h-16 w-16">
+                      <Image
+                        src={project.attributes.project_icon.data ? project.attributes.project_icon.data.attributes.url : placeholderIcon}
+                        alt={project.attributes.project_icon.data && project.attributes.project_icon.data.attributes.alternativeText ? project.attributes.project_icon.data.attributes.alternativeText : `${project.attributes.title} Icon`}
+                        fill
+                        size={`100%`}
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex-grow">
+                      <h2 className="font-medium mb-1 group-hover:text-acapulco-500">{project.attributes.title} <FontAwesomeIcon icon={faArrowRight} className="scale-75 transition transform opacity-0 -translate-x-4 group-hover:-translate-x-0 group-hover:opacity-100" /></h2>
+                      <p className="text-slate-600 leading-normal text-sm">{project.attributes.description}</p>
+                    </div>
+                  </div>
                 </Link>
               </div>
             )
@@ -51,7 +67,7 @@ const Category = ({ categoryObject }) => {
 
 export async function getServerSideProps({ params }) {
   const { category } = params;
-  const categoryResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/category/${category}?populate=projects`);
+  const categoryResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/category/${category}?populate[projects][populate]=*`);
   return {
     props: {
       categoryObject: categoryResponse.data
