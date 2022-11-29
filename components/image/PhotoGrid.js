@@ -14,18 +14,23 @@ const PhotoGrid = ({ imageData }) => {
   })
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-3 gap-2">
+    <div className={`grid grid-cols-2 ${imageData.length % 3 == 0 ? "md:grid-cols-3" : "md:grid-cols-2"} gap-2`}>
       {
         imageData.map((image, index) => {
           return (
-            <div className="col-span-1 row-span-1 last:odd:col-span-2 md:last:odd:col-span-1 hover:cursor-pointer" key={index}>
-              <Image
-                src={image.attributes.url}
-                alt={image.attributes.alternativeText ? image.attributes.alternativeText : image.attributes.name}
-                width={1080}
-                height={1080}
-                onClick={() => (setOpen(true), setImageIndex(index))}
-              />
+            <div className={`col-span-1 row-span-1 last:odd:col-span-2 ${imageData.length % 2 !== 0 && imageData.length % 3 !== 0 ? "md:last:odd:col-span-2" : "md:last:odd:col-span-1"} hover:cursor-pointer`} key={index}>
+              <div className="relative w-full after:content-[''] after:block after:pb-[69.81%]">
+                <div className="absolute w-full h-full overflow-hidden">
+                  <Image
+                    src={image.attributes.url}
+                    alt={image.attributes.alternativeText ? image.attributes.alternativeText : image.attributes.name}
+                    width={1080}
+                    height={1080}
+                    className="h-full w-full object-cover object-center"
+                    onClick={() => (setOpen(true), setImageIndex(index))}
+                  />
+                </div>
+              </div>
             </div>
           )
         })
