@@ -14,7 +14,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
   const router = useRouter()
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/categories?&populate=projects`)
+    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?&populate=projects`)
       .then((res) => res.json())
       .then((data) => {
         setData(data)

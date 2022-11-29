@@ -118,7 +118,7 @@ const Project = ({ projectObject }) => {
 
 export async function getServerSideProps({ params }) {
   const { project } = params;
-  const projectResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/slugify/slugs/project/${project}?populate[blocks][populate]=*&populate[category][populate]=*`);
+  const projectResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/project/${project}?populate[blocks][populate]=*&populate[category][populate]=*`);
   return {
     props: {
       projectObject: projectResponse.data
