@@ -25,7 +25,7 @@ const Project = ({ projectObject }) => {
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
         <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
-        <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-400">{project.category.data.attributes.name}</span>
+        <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-acapulco-400 text-xs text-acapulco-500">{project.category.data.attributes.name}</span>
         <p className="leading-normal">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {
