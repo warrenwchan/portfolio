@@ -19,7 +19,6 @@ const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
   const router = useRouter()
 
-  console.log("project", projectObject)
   return (
     <Layout
       path={project.title}
