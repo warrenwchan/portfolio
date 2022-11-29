@@ -18,7 +18,7 @@ const PhotoGrid = ({ imageData }) => {
       {
         imageData.map((image, index) => {
           return (
-            <div className="col-span-1 row-span-1 last:odd:col-span-2 md:last:odd:col-span-1" key={index}>
+            <div className="col-span-1 row-span-1 last:odd:col-span-2 md:last:odd:col-span-1 hover:cursor-pointer" key={index}>
               <Image
                 src={image.attributes.url}
                 alt={image.attributes.alternativeText ? image.attributes.alternativeText : image.attributes.name}
