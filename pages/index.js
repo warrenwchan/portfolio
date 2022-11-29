@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import Layout from '../components/Layout';
-console.log(process.env.NEXT_PUBLIC_STRAPI_URL)
 const Home = ({ categories }) => {
   return (
     <Layout>
