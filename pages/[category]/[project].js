@@ -19,7 +19,9 @@ const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
   const router = useRouter()
   return (
-    <Layout>
+    <Layout
+      path={project.title}
+    >
       <div className="flex flex-col items-start justify-start gap-8">
         <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>

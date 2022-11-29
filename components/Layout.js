@@ -3,8 +3,11 @@ import Nav from './Nav';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, path }) => {
   const [menuState, setMenuState] = useState(false)
+  const [currentPage, setCurrentPage] = useState("Portfolio")
+  const router = useRouter()
+
 
   const handleMenuState = () => {
     if(window.innerWidth < 1024) {
@@ -16,17 +19,22 @@ const Layout = ({ children }) => {
     return setMenuState(false)
   }
 
+  useEffect(() => {
+    setCurrentPage(path)
+  }, [path])
+
   useEffect(()=> {
     window.innerWidth >= 1024 ? setMenuState(true) : null
     window.addEventListener('resize', ()=> {
       window.innerWidth < 1024 ? setMenuState(false) : setMenuState(true)
     })
- }, [])
+  }, [])
 
   return (
     <>
       <Head>
-        <title>Warren Portfolio</title>
+        <title>{router.route === "/" ? "Warren Chan ・ Portfolio" : `Warren Chan ・ ${currentPage}`}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <main className="h-screen overflow-hidden flex flex-col md:flex-row">
         <div className={`lg:w-1/5 lg:min-w-[420px] w-full md:h-full md:absolute lg:static md:top-0 md:left-0 md:bottom-0 md:z-10 ${menuState ? "md:w-full bg-slate-200/50 backdrop-blur-[2px]" : "md:w-auto"}`}>
