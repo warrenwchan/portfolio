@@ -42,13 +42,13 @@ const PhotoGrid = ({ imageData }) => {
             const width = Math.round(Math.min(rect.width, (rect.height / image.height) * image.width));
             const height = Math.round(Math.min(rect.height, (rect.width / image.width) * image.height));
             return (
-              <div style={{ position: "relative", width, height }}>
+              <div className="relative w-full h-full">
                 <Image
                   src={image}
                   alt={""}
-                  width={1080}
-                  height={1080}
-                  className='object-cover'
+                  fill
+                  sizes="100%"
+                  className='object-contain'
                 />
               </div>
             );
