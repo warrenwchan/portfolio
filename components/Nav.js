@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import gradientBlur from '../public/graident_blur.svg';
+import logo from '../public/wc-logo-black.svg';
 import icon from '../public/favicon.png';
 
 const Nav = ({ menuState, closeMenu, handleMenuState }) => {
@@ -26,11 +27,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
       <div className="flex flex-row justify-between items-center w-full">
         <Link href="/" onClick={closeMenu} className="flex flex-row justify-center items-center gap-1">
           <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2 md:hidden"/>
-          {
-            menuState
-            ? <h2 className="text-xl font-bold uppercase tracking-wider">Warren Chan</h2>
-            : null
-          }
+          <Image src={logo} alt="Logo" className='w-24 hidden lg:block' />
         </Link>
         <button className='w-8 h-8 lg:hidden' onClick={handleMenuState}>
         {
@@ -42,13 +39,17 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
       </div>
       <div className={`flex flex-col justify-between h-full mt-4 ${menuState ? null : "hidden" }`}>
         <div className="flex flex-col justify-center items-start">
-          <p className='text-sm text-slate-600 uppercase tracking-wider mb-2'>Front-end Web Developer ・ UI Designer</p>
-          <p className='text-sm text-slate-600 uppercase tracking-wider'>Vancouver, BC</p>
+          <p className='text-sm text-slate-600 tracking-wide mb-2'>Portfolio</p>
         </div>
         <div className="flex flex-col items-start gap-y-2">
           <p className="text-2xl font-bold mb-4">Links</p>
-          <Link href={`/`} className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm hover:text-acapulco-500 hover:font-medium transition-all duration-500 ease-in-out ${router.route === "/" ? "text-acapulco-600 font-medium" : null}`}>Home</Link>
-          <a href="mailto:w.warrenchan@gmail.com" className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm hover:text-acapulco-500 hover:font-medium transition-all duration-500 ease-in-out`}>
+          <Link
+            href={`/`}
+            className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${router.route === "/" ? "text-acapulco-600 font-medium" : null}`}
+          >
+            Home
+          </Link>
+          <a href="mailto:w.warrenchan@gmail.com" className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm tracking-wide hover:font-medium  hover:text-acapulco-500 transition-all duration-500 ease-in-out`}>
             Contact
           </a>
           {/* <Link href={`/resume`} className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${router.route === "/resume" ? "text-acapulco-400 font-medium" : null}`}>Resume</Link> */}
@@ -62,7 +63,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
                 <Link
                   href={`/${category.attributes.slug}`}
                   key={i}
-                  className={`flex flex-row gap-x-2 pb-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${category.attributes.slug === router.query.category ? "text-acapulco-600 font-medium" : null}`}
+                  className={`flex flex-row gap-x-2 pb-2 text-slate-600 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${category.attributes.slug === router.query.category ? "text-acapulco-600 font-medium" : null}`}
                   onClick={handleMenuState}
                 >
                   <span>{category.id.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}</span>
@@ -79,7 +80,7 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
           menuState={menuState}
           handleMenuState={handleMenuState}
         />
-        <Image src={gradientBlur} alt="gradient blur asset" className="absolute -bottom-16 -left-16 rotate-180 opacity-40 scale-125 -z-10" />
+        <Image src={gradientBlur} alt="gradient blur asset" className="absolute -top-24 -left-24 rotate-180 opacity-20 scale-125 -z-10" />
       </div>
       <div className={`hidden lg:hidden ${menuState ? "hidden" : "md:block"}`}>
         <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2"/>

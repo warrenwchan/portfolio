@@ -7,9 +7,6 @@ import bmcLogo from '../public/bmc-logo.png'
 const Footer = ({ menuState, handleMenuState }) => {
   return (
     <div className='flex flex-row justify-between items-center'>
-      <Link href="/" passHref onClick={handleMenuState}>
-        <Image src={logo} alt="Logo" className='w-24' />
-      </Link>
       <a href="https://www.buymeacoffee.com/warrenwchan" target="_blank" rel="noreferrer" >
         <Image src={bmcLogo} alt="Buy me a coffee!" width={32} height={32} />
       </a>
