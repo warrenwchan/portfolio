@@ -14,6 +14,7 @@ import SubTitle from "../../components/text/SubTitle";
 import BodyText from "../../components/text/BodyText";
 import RichTextField from "../../components/text/RichTextField";
 import PhotoGrid from "../../components/image/PhotoGrid";
+import Button from "../../components/button/Button";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
@@ -102,6 +103,17 @@ const Project = ({ projectObject }) => {
               <div key={i}>
                 <RichTextField
                   data={block}
+                />
+              </div>
+            )
+            break;
+          case "button.button":
+            console.log(block)
+            return (
+              <div key={i}>
+                <Button
+                  text={block.text}
+                  url={block.url}
                 />
               </div>
             )
