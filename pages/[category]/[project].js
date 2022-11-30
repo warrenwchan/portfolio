@@ -118,16 +118,25 @@ const Project = ({ projectObject }) => {
             )
             break;
           case "tags.tags":
+            console.log(block)
             return (
-              <div key={i}>
-                <p className="font-medium mb-2">{block.title}</p>
-                <ul className="flex flex-row gap-x-2">
-                  {block.tag.map((tag, i) => {
-                    return (
-                      <li key={i} className="text-xs font-medium text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
-                    )
-                  })}
-                </ul>
+              <div key={i} className="flex flex-row justify-between items-end">
+                <div>
+                  <p className="font-medium mb-2">{block.title}</p>
+                  <ul className="flex flex-row gap-x-2">
+                    {block.tag.map((tag, i) => {
+                      return (
+                        <li key={i} className="text-xs font-medium text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
+                      )
+                    })}
+                  </ul>
+                </div>
+                <div className="">
+                  <Button
+                    text={block.button.text}
+                    url={block.button.url}
+                  />
+                </div>
               </div>
             )
             break;
