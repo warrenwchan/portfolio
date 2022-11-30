@@ -120,10 +120,10 @@ const Project = ({ projectObject }) => {
           case "tags.tags":
             console.log(block)
             return (
-              <div key={i} className="flex flex-row justify-between items-end">
-                <div>
-                  <p className="font-medium mb-2">{block.title}</p>
-                  <ul className="flex flex-row gap-x-2">
+              <div key={i} className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
+                <div className="lg:w-2/3">
+                  <p className="font-medium mb-4">{block.title}</p>
+                  <ul className="flex flex-row flex-wrap gap-2">
                     {block.tag.map((tag, i) => {
                       return (
                         <li key={i} className="text-xs font-medium text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
@@ -131,7 +131,7 @@ const Project = ({ projectObject }) => {
                     })}
                   </ul>
                 </div>
-                <div className="">
+                <div>
                   <Button
                     text={block.button.text}
                     url={block.button.url}
