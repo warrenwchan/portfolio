@@ -108,13 +108,26 @@ const Project = ({ projectObject }) => {
             )
             break;
           case "button.button":
-            console.log(block)
             return (
               <div key={i}>
                 <Button
                   text={block.text}
                   url={block.url}
                 />
+              </div>
+            )
+            break;
+          case "tags.tags":
+            return (
+              <div key={i}>
+                <p className="font-medium mb-2">{block.title}</p>
+                <ul className="flex flex-row gap-x-2">
+                  {block.tag.map((tag, i) => {
+                    return (
+                      <li key={i} className="text-sm text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
+                    )
+                  })}
+                </ul>
               </div>
             )
             break;
