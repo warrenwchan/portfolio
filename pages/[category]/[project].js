@@ -29,7 +29,7 @@ const Project = ({ projectObject }) => {
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
         <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
-        <span className="px-2 py-1 font-medium bg-slate-50 rounded-xl border border-acapulco-400 text-xs text-acapulco-500">{project.category.data.attributes.name}</span>
+        <span className="px-4 py-1 bg-slate-50 rounded-full border border-acapulco-200 text-xs font-medium text-acapulco-600">{project.category.data.attributes.name}</span>
         <p className="leading-normal px-4">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {
@@ -124,7 +124,7 @@ const Project = ({ projectObject }) => {
                 <ul className="flex flex-row gap-x-2">
                   {block.tag.map((tag, i) => {
                     return (
-                      <li key={i} className="text-sm text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
+                      <li key={i} className="text-xs font-medium text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
                     )
                   })}
                 </ul>
