@@ -37,7 +37,7 @@ const Category = ({ categoryObject }) => {
             return (
               <div key={i} className="py-8 group transition-all duration-200 ease-out">
                 <Link
-                  href={`${categoryObject.attributes.slug}/${project.attributes.slug}`}
+                  href={`/${categoryObject.attributes.slug}/${project.attributes.slug}`}
                 >
                   <div className="flex flex-row gap-x-4">
                     <div className="relative flex-none h-16 w-16">

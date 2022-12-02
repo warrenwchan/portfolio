@@ -118,7 +118,6 @@ const Project = ({ projectObject }) => {
             )
             break;
           case "tags.tags":
-            console.log(block)
             return (
               <div key={i} className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
                 <div className="lg:w-2/3">

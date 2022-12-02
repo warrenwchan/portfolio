@@ -52,7 +52,16 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
           <a href="mailto:w.warrenchan@gmail.com" className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm tracking-wide hover:font-medium  hover:text-acapulco-500 transition-all duration-500 ease-in-out`}>
             Contact
           </a>
-          {/* <Link href={`/resume`} className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${router.route === "/resume" ? "text-acapulco-400 font-medium" : null}`}>Resume</Link> */}
+          <Link
+            href="/resume.pdf"
+            alt="alt text"
+            locale={false}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex flex-row gap-x-2 text-slate-600 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out`}
+          >
+            Resume
+          </Link>
         </div>
         <div className="flex flex-col items-start gap-y-2">
           <p className="text-2xl font-bold mb-4">Projects</p>
