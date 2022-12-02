@@ -39,10 +39,10 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
       </div>
       <div className={`flex flex-col justify-between h-full mt-4 ${menuState ? null : "hidden" }`}>
         <div className="flex flex-col justify-center items-start">
-          <p className='text-sm text-slate-600 tracking-wide mb-2'>Portfolio</p>
+          <p className='text-sm text-slate-600 tracking-wide mb-2 font-IMB'>Portfolio</p>
         </div>
-        <div className="flex flex-col items-start gap-y-2">
-          <p className="text-2xl font-bold mb-4">Links</p>
+        <div className="flex flex-col items-start gap-y-2 font-IMB">
+          <p className="font-sans text-2xl font-bold mb-4">Links</p>
           <Link
             href={`/`}
             className={`flex flex-row gap-x-2 mb-2 text-slate-600 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${router.route === "/" ? "text-acapulco-600 font-medium" : null}`}
@@ -63,8 +63,8 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
             Resume
           </Link>
         </div>
-        <div className="flex flex-col items-start gap-y-2">
-          <p className="text-2xl font-bold mb-4">Projects</p>
+        <div className="flex flex-col items-start gap-y-2 font-IMB">
+          <p className="font-sans text-2xl font-bold mb-4">Projects</p>
           {
             !data ? null :
             data.data.map((category, i) => {
@@ -75,8 +75,8 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
                   className={`flex flex-row gap-x-2 pb-2 text-slate-600 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-500 ease-in-out ${category.attributes.slug === router.query.category ? "text-acapulco-600 font-medium" : null}`}
                   onClick={handleMenuState}
                 >
-                  <span>{category.id.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}</span>
-                  <span>__________</span>
+                  <span className='font-bold'>{category.id.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}</span>
+                  <span className='tracking-[-2px]'>__________</span>
                   <span>{category.attributes.name}</span>
                 </Link>
               )

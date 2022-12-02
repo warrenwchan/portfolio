@@ -20,6 +20,9 @@ module.exports = {
           '800': '#34634F',
           '900': '#213E32'
         },
+      },
+      fontFamily: {
+        IMB: ['IBM Plex Mono', 'monospace']
       }
     },
   },
