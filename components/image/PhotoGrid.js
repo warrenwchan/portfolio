@@ -3,6 +3,7 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import "yet-another-react-lightbox/styles.css";
+import Motion from "../Motion";
 
 
 const PhotoGrid = ({ imageData }) => {
@@ -14,7 +15,7 @@ const PhotoGrid = ({ imageData }) => {
   })
 
   return (
-    <div className={`grid grid-cols-2 ${imageData.length % 3 == 0 ? "md:grid-cols-3" : "md:grid-cols-2"} gap-2`}>
+    <Motion className={`grid grid-cols-2 ${imageData.length % 3 == 0 ? "md:grid-cols-3" : "md:grid-cols-2"} gap-2`}>
       {
         imageData.map((image, index) => {
           return (
@@ -60,7 +61,7 @@ const PhotoGrid = ({ imageData }) => {
           }
         }}
       />
-    </div>
+    </Motion>
   )
 
 }

@@ -15,6 +15,7 @@ import BodyText from "../../components/text/BodyText";
 import RichTextField from "../../components/text/RichTextField";
 import PhotoGrid from "../../components/image/PhotoGrid";
 import Button from "../../components/button/Button";
+import Tags from "../../components/tags/Tags";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
@@ -119,23 +120,10 @@ const Project = ({ projectObject }) => {
             break;
           case "tags.tags":
             return (
-              <div key={i} className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
-                <div className="lg:w-2/3">
-                  <p className="font-medium mb-4">{block.title}</p>
-                  <ul className="flex flex-row flex-wrap gap-2">
-                    {block.tag.map((tag, i) => {
-                      return (
-                        <li key={i} className="text-xs font-medium text-slate-600 px-4 py-1 border border-slate-200 rounded-full">{tag.name}</li>
-                      )
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  <Button
-                    text={block.button.text}
-                    url={block.button.url}
-                  />
-                </div>
+              <div key={i}>
+                <Tags
+                  tagData={block}
+                />
               </div>
             )
             break;

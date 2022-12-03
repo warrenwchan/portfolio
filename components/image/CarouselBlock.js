@@ -5,6 +5,7 @@ import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import "yet-another-react-lightbox/styles.css";
+import Motion from "../Motion";
 
 const PARALLAX_FACTOR = 1.2;
 
@@ -99,7 +100,7 @@ const CarouselBlock = ({ imageData }) => {
   })
 
   return (
-    <div>
+    <Motion>
       <div className="embla bg-slate-100 p-4 rounded">
         <div className="embla__viewport" ref={viewportRef}>
           <div className="embla__container aspect-video">
@@ -161,7 +162,7 @@ const CarouselBlock = ({ imageData }) => {
           style={{ transform: `translateX(${scrollProgress}%)` }}
         />
       </div>
-    </div>
+    </Motion>
   );
 };
 

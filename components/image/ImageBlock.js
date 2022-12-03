@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import "yet-another-react-lightbox/styles.css";
+import Motion from '../Motion';
+
 
 const ImageBlock = ({ imageData }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="relative w-full">
+    <Motion
+      className="relative w-full"
+    >
       <Image
         src={imageData.url}
         alt={imageData.alternativeText ? imageData.alternativeText : imageData.name}
@@ -40,7 +44,7 @@ const ImageBlock = ({ imageData }) => {
           }
         }}
       />
-    </div>
+    </Motion>
   )
 }
 
