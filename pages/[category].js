@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/router'
-import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
 import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
+import Layout from "../components/Layout";
+import SEOHead from '../components/seo/SEOHead'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -21,6 +23,9 @@ const Category = ({ categoryObject }) => {
     <Layout
       path={categoryObject.attributes.name}
     >
+      <SEOHead
+        description={`Explore my catalog of ${categoryObject.attributes.name} projects.`}
+    	/>
       <div className="flex flex-col items-start justify-start gap-8">
         <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm font-IMB" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>

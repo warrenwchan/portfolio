@@ -16,6 +16,7 @@ import RichTextField from "../../components/text/RichTextField";
 import PhotoGrid from "../../components/image/PhotoGrid";
 import Button from "../../components/button/Button";
 import Tags from "../../components/tags/Tags";
+import SEOHead from '../../components/seo/SEOHead'
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
@@ -25,6 +26,9 @@ const Project = ({ projectObject }) => {
     <Layout
       path={project.title}
     >
+      <SEOHead
+        description={`${project.title} | ${project.description}`}
+    	/>
       <div className="flex flex-col items-start justify-start gap-8">
         <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm font-IMB" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>

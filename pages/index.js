@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Moment from 'react-moment';
-import moment from 'moment';
 import 'moment-timezone';
+import SEOHead from '../components/seo/SEOHead'
+import globalMeta from '../seo/globalmeta';
 
 const Home = () => {
   var [date,setDate] = useState(new Date());
@@ -16,6 +17,10 @@ const Home = () => {
 
   return (
     <Layout>
+      <SEOHead
+        canonicalUrl={ globalMeta.siteUrl }
+        ogType="website"
+    	/>
       <div className='flex flex-col gap-y-2 justify-center items-start text-sm text-slate-600 uppercase tracking-wider'>
         <Moment format="dddd, MMMM Do, YYYY" tz="America/Vancouver">{date}</Moment>
         <p>Current time in Vancouver <span className="font-medium text-acapulco-600"><Moment format="h:mm:ss a" tz="America/Vancouver">{date}</Moment></span></p>
