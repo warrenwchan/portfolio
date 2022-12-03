@@ -19,6 +19,7 @@ const ImageBlock = ({ imageData }) => {
         height={1080}
         className='object-cover hover:cursor-pointer'
         onClick={() => setOpen(true)}
+        loading="lazy"
       />
       <Lightbox
         open={open}
@@ -38,6 +39,7 @@ const ImageBlock = ({ imageData }) => {
                   fill
                   sizes="100%"
                   className='object-contain'
+                  loading="lazy"
                 />
               </div>
             );

@@ -119,6 +119,7 @@ const CarouselBlock = ({ imageData }) => {
                         className="object-cover hover:cursor-pointer"
                         sizes="100%"
                         onClick={() => (setOpen(true), setImageIndex(index))}
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -149,6 +150,7 @@ const CarouselBlock = ({ imageData }) => {
                     fill
                     sizes="100%"
                     className='object-contain'
+                    loading="lazy"
                   />
                 </div>
               );

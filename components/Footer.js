@@ -8,7 +8,7 @@ const Footer = ({ menuState, handleMenuState }) => {
   return (
     <div className='flex flex-row justify-between items-center'>
       <a href="https://www.buymeacoffee.com/warrenwchan" target="_blank" rel="noreferrer" >
-        <Image src={bmcLogo} alt="Buy me a coffee!" width={32} height={32} />
+        <Image src={bmcLogo} alt="Buy me a coffee!" width={32} height={32} loading="lazy"/>
       </a>
     </div>
   )

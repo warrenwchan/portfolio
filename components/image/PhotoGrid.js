@@ -29,6 +29,7 @@ const PhotoGrid = ({ imageData }) => {
                     height={1080}
                     className="h-full w-full object-cover object-center"
                     onClick={() => (setOpen(true), setImageIndex(index))}
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -55,6 +56,7 @@ const PhotoGrid = ({ imageData }) => {
                   fill
                   sizes="100%"
                   className='object-contain'
+                  loading="lazy"
                 />
               </div>
             );

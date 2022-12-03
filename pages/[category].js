@@ -88,6 +88,7 @@ const CategoryItem = ({category, project, key}) => {
               fill
               size={`100%`}
               className="object-cover"
+              loading="lazy"
             />
           </div>
           <div className="flex-grow">

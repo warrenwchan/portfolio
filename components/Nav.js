@@ -26,8 +26,8 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
     <nav className={`p-4 py-8 md:p-8 md:h-full sticky top-0 flex flex-col justify-between bg-white ${menuState ? "min-h-screen h-full md:w-1/5 md:min-w-[420px] shadow-xl lg:shadow-none" : null} transition-all ease-out duration-100`}>
       <div className="flex flex-row justify-between items-center w-full">
         <Link href="/" onClick={closeMenu} className="flex flex-row justify-center items-center gap-1">
-          <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2 md:hidden"/>
-          <Image src={logo} alt="Logo" className='w-24 hidden lg:block' />
+          <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2 md:hidden" loading="lazy" />
+          <Image src={logo} alt="Logo" className='w-24 hidden lg:block' loading="lazy" />
         </Link>
         <button className='w-8 h-8 lg:hidden' onClick={handleMenuState}>
         {
@@ -89,10 +89,10 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
           menuState={menuState}
           handleMenuState={handleMenuState}
         />
-        <Image src={gradientBlur} alt="gradient blur asset" className="absolute -top-24 -left-24 rotate-180 opacity-20 scale-125 -z-10" />
+        <Image src={gradientBlur} alt="gradient blur asset" className="absolute -top-24 -left-24 rotate-180 opacity-20 scale-125 -z-10" loading="lazy" />
       </div>
       <div className={`hidden lg:hidden ${menuState ? "hidden" : "md:block"}`}>
-        <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2"/>
+        <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2" loading="lazy"/>
       </div>
     </nav>
   )
