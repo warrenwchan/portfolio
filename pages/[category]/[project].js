@@ -29,12 +29,12 @@ const Project = ({ projectObject }) => {
       <SEOHead
         description={`${project.title} | ${project.description}`}
     	/>
-      <div className="flex flex-col items-start justify-start gap-8">
+      <div className="flex flex-col items-start justify-start gap-8 dark:text-slate-200">
         <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm font-IMB" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
         </button>
-        <h1 className="font-bold text-5xl md:text-6xl">{project.title}</h1>
-        <span className="px-4 py-1 bg-slate-50 rounded-full border border-acapulco-200 text-xs font-medium text-acapulco-600 font-IMB">{project.category.data.attributes.name}</span>
+        <h1 className="font-bold text-5xl md:text-6xl dark:text-white">{project.title}</h1>
+        <span className="px-4 py-1 bg-slate-50 dark:bg-slate-50/10 rounded-full border border-acapulco-200 text-xs font-medium text-acapulco-600 font-IMB">{project.category.data.attributes.name}</span>
         <p className="leading-normal px-4">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {

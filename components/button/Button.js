@@ -3,9 +3,9 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 const Button = ({ text, url}) => {
   return (
-    <div>
+    <div className='text-slate-800 dark:text-white'>
       <a
-        className="group pl-6 pr-3 py-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all ease-out duration-200 rounded inline-flex flex-row justify-start items-center gap-x-1"
+        className="pl-6 pr-3 py-2 text-xs font-medium bg-slate-100 dark:bg-transparent group-hover:bg-slate-200 dark:group-hover:bg-slate-200/10 border border-slate-200 transition-all duration-200 ease-out rounded inline-flex flex-row items-center gap-x-1"
         href={url}
         target="_blank"
         rel="noreferrer"
