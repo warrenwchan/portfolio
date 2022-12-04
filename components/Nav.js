@@ -27,7 +27,11 @@ const Nav = ({ menuState, closeMenu, handleMenuState }) => {
       <div className="flex flex-row justify-between items-center w-full">
         <Link href="/" onClick={closeMenu} className="flex flex-row justify-center items-center gap-1">
           <Image src={icon} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2 md:hidden" loading="lazy" />
-          <Image src={logo} alt="Logo" className='w-24 hidden lg:block' loading="lazy" />
+          {
+            menuState
+            ? <Image src={logo} alt="Logo" className='w-20 lg:w-24' loading="lazy" />
+            : null
+          }
         </Link>
         <button className='w-8 h-8 lg:hidden' onClick={handleMenuState}>
         {
