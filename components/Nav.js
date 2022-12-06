@@ -94,7 +94,7 @@ const Nav = () => {
     <nav
       className={`sticky top-0 flex h-full w-full justify-between gap-y-8 overscroll-contain bg-white p-4 py-8 text-slate-600 transition-all duration-200 ease-in-out dark:bg-zinc-800 dark:text-zinc-200 md:h-screen md:flex-col md:p-8 ${
         state.menu
-          ? "min-h-screen flex-col shadow-xl md:w-[420px]"
+          ? "h-[100dvh] min-h-screen flex-col shadow-xl md:w-[420px]"
           : "flex-row md:w-auto"
       }`}
     >
@@ -149,7 +149,7 @@ const Nav = () => {
         </button>
       </div>
       <div
-        className={`mt-4 flex h-full grow flex-col justify-between gap-y-8 overflow-y-auto ${
+        className={`mt-4 flex h-full grow flex-col justify-between gap-y-8 ${
           state.menu ? "" : "hidden lg:flex"
         }`}
       >

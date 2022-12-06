@@ -13,7 +13,7 @@ const Footer = () => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = (theme) => {
-    setTheme;
+    setTheme(theme);
     dispatch({
       type: "THEME_TOGGLE",
       payload: theme,
