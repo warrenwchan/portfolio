@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import {useTheme} from 'next-themes'
+import { useTheme } from 'next-themes'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
 
 import bmcLogo from '../public/bmc-logo.png'
 import bmcLogoYellow from '../public/bmc-logo-yellow.png'
 
-const Footer = ({ menuState, handleMenuState }) => {
+const Footer = () => {
   const {theme, setTheme} = useTheme()
 
   return (

@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from "../../components/Layout";
 import { fetcher } from "../../lib/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { motion, useScroll, useSpring } from "framer-motion";
 
 // Components
 import CarouselBlock from '../../components/image/CarouselBlock';
@@ -22,6 +22,17 @@ const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
   const router = useRouter()
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    return scrollYProgress.onChange()
+  }, [])
+
   return (
     <Layout
       path={project.title}
@@ -29,6 +40,7 @@ const Project = ({ projectObject }) => {
       <SEOHead
         description={`${project.title} | ${project.description}`}
     	/>
+      <motion.div className="fixed top-0 left-0 right-0 h-2 z-50 bg-gradient-to-r from-acapulco-300 to-acapulco-500 origin-[0%]"  style={{ scaleX }} />
       <div className="flex flex-col items-start justify-start gap-8 dark:text-slate-200">
         <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm font-IMB" type="button" onClick={() => router.back()}>
           <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAnimation, motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const animationVarient = {
