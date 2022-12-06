@@ -21,7 +21,7 @@ const Nav = () => {
   const { state, dispatch } = useContext(Context);
 
   const toggleMenu = () => {
-    window.innerWidth <= 1024 ?
+    window.innerWidth < 1024 ?
     dispatch({
       type: "MENU_TOGGLE",
       payload: !state.menu,
@@ -30,7 +30,7 @@ const Nav = () => {
   }
 
   const toggleMenuClose = () => {
-    window.innerWidth <= 1024 ?
+    window.innerWidth < 1024 ?
     dispatch({
       type: "MENU_TOGGLE",
       payload: false,
@@ -39,7 +39,7 @@ const Nav = () => {
   }
 
   useEffect(() => {
-    if( state.menu === true ) {
+    if( state.menu === true && window.innerWidth < 1024 ) {
       document.querySelector("html").classList.add("overflow-y-hidden")
     } else {
       document.querySelector("html").classList.remove("overflow-y-hidden")
