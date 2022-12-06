@@ -3,8 +3,12 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const animationVarient = {
-  visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 0.5, ease: "linear", type: "spring" } },
-  hidden: { opacity: 0, y: 25}
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, delay: 0.5, ease: "linear", type: "spring" },
+  },
+  hidden: { opacity: 0, y: 25 },
 };
 
 const Motion = ({ className, children }) => {
@@ -27,7 +31,7 @@ const Motion = ({ className, children }) => {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
-export default Motion
+export default Motion;

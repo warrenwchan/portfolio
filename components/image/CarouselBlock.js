@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
@@ -11,7 +11,7 @@ const PARALLAX_FACTOR = 1.2;
 
 const PrevButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--prev fill-acapulco-400 hover:fill-acapulco-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all duration-200 ease-out"
+    className="embla__button embla__button--prev rounded border border-slate-100 bg-slate-50 fill-acapulco-400 p-2 shadow-sm transition-all duration-200 ease-out hover:scale-125 hover:fill-acapulco-600 hover:shadow-lg"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -23,7 +23,7 @@ const PrevButton = ({ enabled, onClick }) => (
 
 const NextButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--next fill-acapulco-400 hover:fill-acapulco-600 p-2 bg-slate-50 rounded border border-slate-100 shadow-sm hover:shadow-lg hover:scale-125 transition-all duration-200 ease-out"
+    className="embla__button embla__button--next rounded border border-slate-100 bg-slate-50 fill-acapulco-400 p-2 shadow-sm transition-all duration-200 ease-out hover:scale-125 hover:fill-acapulco-600 hover:shadow-lg"
     onClick={onClick}
     disabled={!enabled}
   >
@@ -37,13 +37,16 @@ const CarouselBlock = ({ imageData }) => {
   const [open, setOpen] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const wheelGestures = WheelGesturesPlugin({
-    wheelDraggingClass: 'my-wheel-class',
-  })
+    wheelDraggingClass: "my-wheel-class",
+  });
 
-  const [viewportRef, embla] = useEmblaCarousel({
-    loop: false,
-    dragFree: true,
-  }, [wheelGestures]);
+  const [viewportRef, embla] = useEmblaCarousel(
+    {
+      loop: false,
+      dragFree: true,
+    },
+    [wheelGestures]
+  );
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
   const [parallaxValues, setParallaxValues] = useState([]);
@@ -96,12 +99,12 @@ const CarouselBlock = ({ imageData }) => {
   }, [embla, onSelect, onScroll]);
 
   const images = imageData.map((image) => {
-    return image.attributes.url
-  })
+    return image.attributes.url;
+  });
 
   return (
     <Motion>
-      <div className="embla bg-slate-100 p-4 rounded">
+      <div className="embla rounded bg-slate-100 p-4">
         <div className="embla__viewport" ref={viewportRef}>
           <div className="embla__container aspect-video">
             {imageData.map((image, index) => (
@@ -109,12 +112,18 @@ const CarouselBlock = ({ imageData }) => {
                 <div className="embla__slide__inner">
                   <div
                     className="embla__slide__parallax"
-                    style={{ transform: `translateX(${parallaxValues[index]}%)` }}
+                    style={{
+                      transform: `translateX(${parallaxValues[index]}%)`,
+                    }}
                   >
-                    <div className="relative w-full h-full">
+                    <div className="relative h-full w-full">
                       <Image
                         src={image.attributes.url}
-                        alt={image.attributes.alternativeText ? image.attributes.alternativeText : image.attributes.name}
+                        alt={
+                          image.attributes.alternativeText
+                            ? image.attributes.alternativeText
+                            : image.attributes.name
+                        }
                         fill
                         className="object-cover hover:cursor-pointer"
                         sizes="100%"
@@ -140,21 +149,25 @@ const CarouselBlock = ({ imageData }) => {
           styles={{ container: { backgroundColor: "rgba(0, 0, 0, .9)" } }}
           render={{
             slide: (image, offset, rect) => {
-              const width = Math.round(Math.min(rect.width, (rect.height / image.height) * image.width));
-              const height = Math.round(Math.min(rect.height, (rect.width / image.width) * image.height));
+              const width = Math.round(
+                Math.min(rect.width, (rect.height / image.height) * image.width)
+              );
+              const height = Math.round(
+                Math.min(rect.height, (rect.width / image.width) * image.height)
+              );
               return (
-                <div className="relative w-full h-full">
+                <div className="relative h-full w-full">
                   <Image
                     src={image}
                     alt={""}
                     fill
                     sizes="100%"
-                    className='object-contain'
+                    className="object-contain"
                     loading="lazy"
                   />
                 </div>
               );
-            }
+            },
           }}
         />
       </div>
@@ -169,5 +182,3 @@ const CarouselBlock = ({ imageData }) => {
 };
 
 export default CarouselBlock;
-
-

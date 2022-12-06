@@ -1,129 +1,177 @@
-import { useState, useEffect, useContext } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect, useContext } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faBars } from "@fortawesome/free-solid-svg-icons";
 import { Context } from "../lib/context/context";
 
-import Footer from './Footer';
+import Footer from "./Footer";
 
-import gradientBlur from '../public/graident_blur.svg';
-import logoBlack from '../public/logo-black.svg';
-import logoWhite from '../public/logo-white.svg';
-import iconBlack from '../public/icon-black.svg';
-import iconWhite from '../public/icon-white.svg';
+import gradientBlur from "../public/graident_blur.svg";
+import logoBlack from "../public/logo-black.svg";
+import logoWhite from "../public/logo-white.svg";
+import iconBlack from "../public/icon-black.svg";
+import iconWhite from "../public/icon-white.svg";
 
 const Nav = () => {
-  const router = useRouter()
-  const [mounted, setMounted] = useState(false)
-  const [ data, setData ] = useState(null)
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState(null);
   const { state, dispatch } = useContext(Context);
 
   const toggleMenu = () => {
-    window.innerWidth < 1024 ?
-    dispatch({
-      type: "MENU_TOGGLE",
-      payload: !state.menu,
-    })
-    : null
-  }
+    window.innerWidth < 1024
+      ? dispatch({
+          type: "MENU_TOGGLE",
+          payload: !state.menu,
+        })
+      : null;
+  };
 
   const toggleMenuClose = () => {
-    window.innerWidth < 1024 ?
-    dispatch({
-      type: "MENU_TOGGLE",
-      payload: false,
-    })
-    : null
-  }
+    window.innerWidth < 1024
+      ? dispatch({
+          type: "MENU_TOGGLE",
+          payload: false,
+        })
+      : null;
+  };
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   // Checks to see if menu is open, if menu is opened disabled scroll on website.
   useEffect(() => {
-    if( state.menu === true && window.innerWidth < 1024 ) {
-      document.querySelector("html").classList.add("overflow-hidden")
+    if (state.menu === true && window.innerWidth < 1024) {
+      document.querySelector("html").classList.add("overflow-hidden");
     } else {
-      document.querySelector("html").classList.remove("overflow-hidden")
+      document.querySelector("html").classList.remove("overflow-hidden");
     }
-  }, [state.menu])
+  }, [state.menu]);
 
   // Keep menu toggled if on desktop view.
-  useEffect(()=> {
-    window.innerWidth >= 1024 ? dispatch({type: "MENU_TOGGLE", payload: true}) : dispatch({type: "MENU_TOGGLE", payload: false})
-  }, [dispatch])
+  useEffect(() => {
+    window.innerWidth >= 1024
+      ? dispatch({ type: "MENU_TOGGLE", payload: true })
+      : dispatch({ type: "MENU_TOGGLE", payload: false });
+  }, [dispatch]);
 
   // Check if window size has changed, if changed width, close menu. if changed height adapt height.
-  useEffect(()=> {
-    let windowWidth = window.innerWidth
-    window.addEventListener('resize', () => {
-      if( windowWidth === window.innerWidth ) {
-        if( state.menu === true ) {
-          dispatch({type: "MENU_TOGGLE", payload: true})
+  useEffect(() => {
+    let windowWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (windowWidth === window.innerWidth) {
+        if (state.menu === true) {
+          dispatch({ type: "MENU_TOGGLE", payload: true });
         }
       } else {
-        if( window.innerWidth < 1024 ) {
-          dispatch({type: "MENU_TOGGLE", payload: false})
-          windowWidth = window.innerWidth
+        if (window.innerWidth < 1024) {
+          dispatch({ type: "MENU_TOGGLE", payload: false });
+          windowWidth = window.innerWidth;
         } else {
-          dispatch({type: "MENU_TOGGLE", payload: true})
-          windowWidth = window.innerWidth
-        };
+          dispatch({ type: "MENU_TOGGLE", payload: true });
+          windowWidth = window.innerWidth;
+        }
       }
-    })
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?&populate=projects`)
       .then((res) => res.json())
       .then((data) => {
-        setData(data)
-      })
-  }, [])
+        setData(data);
+      });
+  }, []);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
-    <nav className={`h-full md:h-screen w-full p-4 md:p-8 py-8 sticky top-0 flex md:flex-col justify-between overscroll-contain bg-white dark:bg-zinc-800 text-slate-600 dark:text-zinc-200 transition-all ease-in-out duration-200 ${state.menu ? "flex-col min-h-screen shadow-xl md:w-[420px]" : "flex-row md:w-auto"}`}>
-      <div className="flex-none flex flex-row justify-between items-center w-full">
-        <Link href="/" className="flex flex-row justify-center items-center gap-1">
-          <Image src={iconWhite} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 hidden dark:md:hidden dark:block" loading="lazy" onClick={() => toggleMenuClose()} />
-          <Image src={iconBlack} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 md:hidden dark:hidden" loading="lazy" onClick={() => toggleMenuClose()} />
-          {
-            state.menu
-            ? <div>
-                <Image src={logoWhite} alt="Logo" className='w-20 lg:w-24 hidden dark:md:block' loading="lazy" onClick={() => toggleMenuClose()}  />
-                <Image src={logoBlack} alt="Logo" className='w-20 lg:w-24 hidden md:block dark:hidden' loading="lazy" onClick={() => toggleMenuClose()}  />
-              </div>
-            : null
-          }
+    <nav
+      className={`sticky top-0 flex h-full w-full justify-between gap-y-8 overscroll-contain bg-white p-4 py-8 text-slate-600 transition-all duration-200 ease-in-out dark:bg-zinc-800 dark:text-zinc-200 md:h-screen md:flex-col md:p-8 ${
+        state.menu
+          ? "min-h-screen flex-col shadow-xl md:w-[420px]"
+          : "flex-row md:w-auto"
+      }`}
+    >
+      <div className="flex w-full flex-none flex-row items-center justify-between">
+        <Link
+          href="/"
+          className="flex flex-row items-center justify-center gap-1"
+        >
+          <Image
+            src={iconWhite}
+            alt="Warren Chan Icon"
+            width={32}
+            height={32}
+            className="hidden h-8 w-8 p-2 dark:block dark:md:hidden"
+            loading="lazy"
+            onClick={() => toggleMenuClose()}
+          />
+          <Image
+            src={iconBlack}
+            alt="Warren Chan Icon"
+            width={32}
+            height={32}
+            className="h-8 w-8 p-2 dark:hidden md:hidden"
+            loading="lazy"
+            onClick={() => toggleMenuClose()}
+          />
+          {state.menu ? (
+            <div>
+              <Image
+                src={logoWhite}
+                alt="Logo"
+                className="hidden w-20 dark:md:block lg:w-24"
+                loading="lazy"
+                onClick={() => toggleMenuClose()}
+              />
+              <Image
+                src={logoBlack}
+                alt="Logo"
+                className="hidden w-20 dark:hidden md:block lg:w-24"
+                loading="lazy"
+                onClick={() => toggleMenuClose()}
+              />
+            </div>
+          ) : null}
         </Link>
-        <button className='w-8 h-8 lg:hidden' onClick={() => toggleMenu()}>
-        {
-          state.menu
-          ? <FontAwesomeIcon icon={faTimes} className="transition transform" />
-          : <FontAwesomeIcon icon={faBars} className="transition transform" />
-        }
+        <button className="h-8 w-8 lg:hidden" onClick={() => toggleMenu()}>
+          {state.menu ? (
+            <FontAwesomeIcon icon={faTimes} className="transform transition" />
+          ) : (
+            <FontAwesomeIcon icon={faBars} className="transform transition" />
+          )}
         </button>
       </div>
-      <div className={`grow flex flex-col justify-between h-full mt-4 ${state.menu ? "" : "hidden lg:flex" }`}>
-        <div className="flex flex-col justify-center items-start">
-          <p className='text-sm tracking-wide mb-2 font-IMB'>Portfolio</p>
+      <div
+        className={`mt-4 flex h-full grow flex-col justify-between gap-y-8 overflow-y-auto ${
+          state.menu ? "" : "hidden lg:flex"
+        }`}
+      >
+        <div className="flex flex-col items-start justify-center">
+          <p className="mb-2 font-IMB text-sm tracking-wide">Portfolio</p>
         </div>
         <div className="flex flex-col items-start gap-y-2 font-IMB">
-          <p className="font-sans text-2xl font-bold mb-4 text-black dark:text-white">Links</p>
+          <p className="mb-4 font-sans text-2xl font-bold text-black dark:text-white">
+            Links
+          </p>
           <Link
             href={`/`}
-            className={`flex flex-row gap-x-2 mb-2 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-200 ease-in-out ${router.route === "/" ? "text-acapulco-600 font-medium" : null}`}
+            className={`mb-2 flex flex-row gap-x-2 text-sm tracking-wide transition-all duration-200 ease-in-out hover:font-medium hover:text-acapulco-500 ${
+              router.route === "/" ? "font-medium text-acapulco-600" : null
+            }`}
           >
             Home
           </Link>
-          <a href="mailto:w.warrenchan@gmail.com" className={`flex flex-row gap-x-2 mb-2 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-200 ease-in-out`}>
+          <a
+            href="mailto:w.warrenchan@gmail.com"
+            className={`mb-2 flex flex-row gap-x-2 text-sm tracking-wide transition-all duration-200 ease-in-out hover:font-medium hover:text-acapulco-500`}
+          >
             Contact
           </a>
           <Link
@@ -132,41 +180,62 @@ const Nav = () => {
             locale={false}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex flex-row gap-x-2 text-sm hover:font-medium hover:text-acapulco-500 transition-all duration-200 ease-in-out`}
+            className={`flex flex-row gap-x-2 text-sm transition-all duration-200 ease-in-out hover:font-medium hover:text-acapulco-500`}
           >
             Resume
           </Link>
         </div>
         <div className="flex flex-col items-start gap-y-2 font-IMB">
-          <p className="font-sans text-2xl font-bold mb-4 text-black dark:text-white">Projects</p>
-          {
-            !data ? null :
-            data.data.map((category, i) => {
-              return (
-                <Link
-                  href={`/${category.attributes.slug}`}
-                  key={i}
-                  className={`flex flex-row gap-x-2 pb-2 text-sm tracking-wide hover:font-medium hover:text-acapulco-500 transition-all duration-200 ease-in-out ${category.attributes.slug === router.query.category ? "text-acapulco-600 font-medium" : null}`}
-                  onClick={() => toggleMenu()}
-                >
-                  <span className='font-bold'>{category.id.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}</span>
-                  <span className='tracking-[-2px]'>__________</span>
-                  <span>{category.attributes.name}</span>
-                </Link>
-              )
-            })
-          }
+          <p className="mb-4 font-sans text-2xl font-bold text-black dark:text-white">
+            Projects
+          </p>
+          {!data
+            ? null
+            : data.data.map((category, i) => {
+                return (
+                  <Link
+                    href={`/${category.attributes.slug}`}
+                    key={i}
+                    className={`flex flex-row gap-x-2 pb-2 text-sm tracking-wide transition-all duration-200 ease-in-out hover:font-medium hover:text-acapulco-500 ${
+                      category.attributes.slug === router.query.category
+                        ? "font-medium text-acapulco-600"
+                        : null
+                    }`}
+                    onClick={() => toggleMenu()}
+                  >
+                    <span className="font-bold">
+                      {category.id.toLocaleString("en-US", {
+                        minimumIntegerDigits: 2,
+                        useGrouping: false,
+                      })}
+                    </span>
+                    <span className="tracking-[-2px]">__________</span>
+                    <span>{category.attributes.name}</span>
+                  </Link>
+                );
+              })}
         </div>
-        <div className="flex flex-col gap-y-16">
-        </div>
+        <div className="flex flex-col gap-y-16"></div>
         <Footer />
-        <Image src={gradientBlur} alt="gradient blur asset" className="absolute -top-24 -left-24 rotate-180 opacity-20 scale-125 -z-10" loading="lazy" />
+        <Image
+          src={gradientBlur}
+          alt="gradient blur asset"
+          className="absolute -top-24 -left-24 -z-10 rotate-180 scale-125 opacity-20"
+          loading="lazy"
+        />
       </div>
       <div className={`hidden lg:hidden ${state.menu ? "hidden" : "md:block"}`}>
-        <Image src={state.theme === "dark" ? iconWhite : iconBlack} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2" loading="lazy"/>
+        <Image
+          src={state.theme === "dark" ? iconWhite : iconBlack}
+          alt="Warren Chan Icon"
+          width={24}
+          height={24}
+          className="h-8 w-8 p-2"
+          loading="lazy"
+        />
       </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Nav;

@@ -1,5 +1,5 @@
-import MarkdownIt from 'markdown-it';
-import Motion from '../Motion';
+import MarkdownIt from "markdown-it";
+import Motion from "../Motion";
 
 const RichTextField = ({ data }) => {
   const md = new MarkdownIt();
@@ -7,9 +7,12 @@ const RichTextField = ({ data }) => {
 
   return (
     <Motion>
-      <section className='flex flex-col gap-y-2 leading-normal px-4' dangerouslySetInnerHTML={{__html: htmlContent}}></section>
+      <section
+        className="flex flex-col gap-y-2 px-4 leading-normal"
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      ></section>
     </Motion>
-  )
-}
+  );
+};
 
-export default RichTextField
+export default RichTextField;

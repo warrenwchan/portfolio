@@ -1,13 +1,11 @@
-import Motion from "../Motion"
+import Motion from "../Motion";
 
 const BodyText = ({ data }) => {
   return (
     <Motion>
-      <p className="leading-normal px-4">
-        {data.body_text}
-      </p>
+      <p className="px-4 leading-normal">{data.body_text}</p>
     </Motion>
-  )
-}
+  );
+};
 
-export default BodyText
+export default BodyText;
