@@ -92,10 +92,14 @@ const Nav = () => {
     <nav className={`h-full md:h-screen w-full p-4 md:p-8 py-8 sticky top-0 flex md:flex-col justify-between overscroll-contain bg-white dark:bg-zinc-800 text-slate-600 dark:text-zinc-200 transition-all ease-in-out duration-200 ${state.menu ? "flex-col min-h-screen shadow-xl md:w-[420px]" : "flex-row md:w-auto"}`}>
       <div className="flex-none flex flex-row justify-between items-center w-full">
         <Link href="/" className="flex flex-row justify-center items-center gap-1">
-          <Image src={state.theme === "dark" ? iconWhite : iconBlack} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 md:hidden" loading="lazy" onClick={() => toggleMenuClose()} />
+          <Image src={iconWhite} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 hidden dark:md:hidden dark:block" loading="lazy" onClick={() => toggleMenuClose()} />
+          <Image src={iconBlack} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 md:hidden dark:hidden" loading="lazy" onClick={() => toggleMenuClose()} />
           {
             state.menu
-            ? <Image src={state.theme === "dark" ? logoWhite : logoBlack} alt="Logo" className='w-20 lg:w-24 hidden md:block' loading="lazy" onClick={() => toggleMenuClose()}  />
+            ? <div>
+                <Image src={logoWhite} alt="Logo" className='w-20 lg:w-24 hidden dark:md:block' loading="lazy" onClick={() => toggleMenuClose()}  />
+                <Image src={logoBlack} alt="Logo" className='w-20 lg:w-24 hidden md:block dark:hidden' loading="lazy" onClick={() => toggleMenuClose()}  />
+              </div>
             : null
           }
         </Link>
