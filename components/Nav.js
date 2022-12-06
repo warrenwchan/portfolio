@@ -16,8 +16,8 @@ import iconWhite from '../public/icon-white.svg';
 
 const Nav = () => {
   const router = useRouter()
+  const [mounted, setMounted] = useState(false)
   const [ data, setData ] = useState(null)
-  const [ logoTheme, setLogoTheme ] = useState(null)
   const { state, dispatch } = useContext(Context);
 
   const toggleMenu = () => {
@@ -39,19 +39,42 @@ const Nav = () => {
   }
 
   useEffect(() => {
-    if( state.menu === true && window.innerWidth < 1024 ) {
-      document.querySelector("html").classList.add("overflow-y-hidden")
-    } else {
-      document.querySelector("html").classList.remove("overflow-y-hidden")
-    }
-  })
+    setMounted(true)
+  }, [])
 
+  // Checks to see if menu is open, if menu is opened disabled scroll on website.
+  useEffect(() => {
+    if( state.menu === true && window.innerWidth < 1024 ) {
+      document.querySelector("html").classList.add("overflow-hidden")
+    } else {
+      document.querySelector("html").classList.remove("overflow-hidden")
+    }
+  }, [state.menu])
+
+  // Keep menu toggled if on desktop view.
   useEffect(()=> {
     window.innerWidth >= 1024 ? dispatch({type: "MENU_TOGGLE", payload: true}) : dispatch({type: "MENU_TOGGLE", payload: false})
-    window.addEventListener('resize', ()=> {
-      window.innerWidth < 1024 ? dispatch({type: "MENU_TOGGLE", payload: false}) : dispatch({type: "MENU_TOGGLE", payload: true})
-    })
   }, [dispatch])
+
+  // Check if window size has changed, if changed width, close menu. if changed height adapt height.
+  useEffect(()=> {
+    let windowWidth = window.innerWidth
+    window.addEventListener('resize', () => {
+      if( windowWidth === window.innerWidth ) {
+        if( state.menu === true ) {
+          dispatch({type: "MENU_TOGGLE", payload: true})
+        }
+      } else {
+        if( window.innerWidth < 1024 ) {
+          dispatch({type: "MENU_TOGGLE", payload: false})
+          windowWidth = window.innerWidth
+        } else {
+          dispatch({type: "MENU_TOGGLE", payload: true})
+          windowWidth = window.innerWidth
+        };
+      }
+    })
+  }, [])
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?&populate=projects`)
@@ -61,8 +84,12 @@ const Nav = () => {
       })
   }, [])
 
+  if (!mounted) {
+    return null
+  }
+
   return (
-    <nav className={`h-full md:h-screen w-full p-4 md:p-8 py-8 sticky top-0 flex md:flex-col justify-between bg-white dark:bg-zinc-800 text-slate-600 dark:text-zinc-200 transition-all ease-in-out duration-200 ${state.menu ? "flex-col min-h-screen shadow-xl md:w-[420px]" : "flex-row md:w-auto"}`}>
+    <nav className={`h-full md:h-screen w-full p-4 md:p-8 py-8 sticky top-0 flex md:flex-col justify-between overscroll-contain bg-white dark:bg-zinc-800 text-slate-600 dark:text-zinc-200 transition-all ease-in-out duration-200 ${state.menu ? "flex-col min-h-screen shadow-xl md:w-[420px]" : "flex-row md:w-auto"}`}>
       <div className="flex-none flex flex-row justify-between items-center w-full">
         <Link href="/" className="flex flex-row justify-center items-center gap-1">
           <Image src={state.theme === "dark" ? iconWhite : iconBlack} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 md:hidden" loading="lazy" onClick={() => toggleMenuClose()} />

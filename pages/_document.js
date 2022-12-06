@@ -4,8 +4,8 @@ export default function Docmument() {
   return (
     <Html lang="en">
       <Head />
-      <body className="min-h-screen">
-        <Main className="h-full" />
+      <body>
+        <Main />
         <NextScript />
       </body>
     </Html>
