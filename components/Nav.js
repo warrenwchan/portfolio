@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useTheme } from 'next-themes'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../lib/context/context";
@@ -18,31 +17,32 @@ import iconWhite from '../public/icon-white.svg';
 const Nav = () => {
   const router = useRouter()
   const [ data, setData ] = useState(null)
-  const { theme, setTheme } = useTheme()
+  const [ logoTheme, setLogoTheme ] = useState(null)
   const { state, dispatch } = useContext(Context);
 
   const toggleMenu = () => {
+    window.innerWidth <= 1024 ?
     dispatch({
       type: "MENU_TOGGLE",
       payload: !state.menu,
     })
+    : null
   }
 
   const toggleMenuClose = () => {
+    window.innerWidth <= 1024 ?
     dispatch({
       type: "MENU_TOGGLE",
       payload: false,
     })
+    : null
   }
 
   useEffect(() => {
     if( state.menu === true ) {
-      console.log("true")
-      document.querySelector("body").classList.add("overflow-y-hidden")
-
+      document.querySelector("html").classList.add("overflow-y-hidden")
     } else {
-      console.log("false")
-      document.querySelector("body").classList.remove("overflow-y-hidden")
+      document.querySelector("html").classList.remove("overflow-y-hidden")
     }
   })
 
@@ -51,7 +51,7 @@ const Nav = () => {
     window.addEventListener('resize', ()=> {
       window.innerWidth < 1024 ? dispatch({type: "MENU_TOGGLE", payload: false}) : dispatch({type: "MENU_TOGGLE", payload: true})
     })
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?&populate=projects`)
@@ -65,10 +65,10 @@ const Nav = () => {
     <nav className={`h-full md:h-screen w-full p-4 md:p-8 py-8 sticky top-0 flex md:flex-col justify-between bg-white dark:bg-zinc-800 text-slate-600 dark:text-zinc-200 transition-all ease-in-out duration-200 ${state.menu ? "flex-col min-h-screen shadow-xl md:w-[420px]" : "flex-row md:w-auto"}`}>
       <div className="flex-none flex flex-row justify-between items-center w-full">
         <Link href="/" className="flex flex-row justify-center items-center gap-1">
-          <Image src={theme === 'dark' ? iconWhite : iconBlack} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 md:hidden" loading="lazy" onClick={() => toggleMenuClose()} />
+          <Image src={state.theme === "dark" ? iconWhite : iconBlack} alt="Warren Chan Icon" width={32} height={32} className="w-8 h-8 p-2 md:hidden" loading="lazy" onClick={() => toggleMenuClose()} />
           {
             state.menu
-            ? <Image src={theme === 'dark' ? logoWhite : logoBlack} alt="Logo" className='w-20 lg:w-24 hidden md:block' loading="lazy" onClick={() => toggleMenuClose()}  />
+            ? <Image src={state.theme === "dark" ? logoWhite : logoBlack} alt="Logo" className='w-20 lg:w-24 hidden md:block' loading="lazy" onClick={() => toggleMenuClose()}  />
             : null
           }
         </Link>
@@ -132,7 +132,7 @@ const Nav = () => {
         <Image src={gradientBlur} alt="gradient blur asset" className="absolute -top-24 -left-24 rotate-180 opacity-20 scale-125 -z-10" loading="lazy" />
       </div>
       <div className={`hidden lg:hidden ${state.menu ? "hidden" : "md:block"}`}>
-        <Image src={theme === 'dark' ? iconWhite : iconBlack} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2" loading="lazy"/>
+        <Image src={state.theme === "dark" ? iconWhite : iconBlack} alt="Warren Chan Icon" width={24} height={24} className="w-8 h-8 p-2" loading="lazy"/>
       </div>
     </nav>
   )

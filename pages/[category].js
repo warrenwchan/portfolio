@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/router'
@@ -16,8 +16,17 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import placeholderIcon from '../public/placeholder-icon.png'
 
 const Category = ({ categoryObject }) => {
+  const [mounted, setMounted] = useState(false)
   let projects = categoryObject.attributes.projects.data
   const router = useRouter()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <Layout

@@ -13,14 +13,14 @@ const inter = Inter({ subsets: ['latin'] })
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Provider>
-        <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class">
+        <Provider>
           <div className={`${inter.className} h-full`}>
             <Component {...pageProps} />
             <Analytics />
           </div>
-        </ThemeProvider>
-      </Provider>
+        </Provider>
+      </ThemeProvider>
     </>
   )
 }

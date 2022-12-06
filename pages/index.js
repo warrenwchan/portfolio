@@ -6,14 +6,23 @@ import SEOHead from '../components/seo/SEOHead'
 import globalMeta from '../seo/globalmeta';
 
 const Home = () => {
-  var [date, setDate] = useState(new Date());
+  const [mounted, setMounted] = useState(false)
+  const [date, setDate] = useState();
 
   useEffect(() => {
-    var timer = setInterval(()=>setDate(new Date()), 1000 )
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    var timer = setInterval(() => setDate(new Date()), 1000 )
     return function cleanup() {
       clearInterval(timer)
     }
   }, []);
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <Layout>
