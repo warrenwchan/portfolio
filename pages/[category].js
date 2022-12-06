@@ -47,7 +47,7 @@ const Category = ({ categoryObject }) => {
           {categoryObject.attributes.name}
         </h1>
       </div>
-      <div className="grid grid-cols-1 divide-y divide-slate-200">
+      <div className="grid grid-cols-1 divide-y divide-slate-200 dark:divide-zinc-800">
         {projects.length ? (
           projects.map((project, i) => {
             return (
@@ -57,7 +57,7 @@ const Category = ({ categoryObject }) => {
             );
           })
         ) : (
-          <p className="text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-zinc-400">
             No {categoryObject.attributes.name} Projects Available At The
             Moment...
           </p>

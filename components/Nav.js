@@ -196,12 +196,12 @@ const Nav = () => {
                     key={i}
                     className={`flex flex-row gap-x-2 pb-2 text-sm tracking-wide transition-all duration-200 ease-in-out hover:font-medium hover:text-acapulco-500 ${
                       category.attributes.slug === router.query.category
-                        ? "font-medium text-acapulco-600"
+                        ? "font-bold text-acapulco-600"
                         : null
                     }`}
                     onClick={() => toggleMenu()}
                   >
-                    <span className="font-bold">
+                    <span>
                       {category.id.toLocaleString("en-US", {
                         minimumIntegerDigits: 2,
                         useGrouping: false,
