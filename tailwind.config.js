@@ -22,9 +22,6 @@ module.exports = {
           900: "#213E32",
         },
       },
-      fontFamily: {
-        IMB: ["IBM Plex Mono", "monospace"],
-      },
     },
   },
   plugins: [],

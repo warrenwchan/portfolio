@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -128,4 +126,13 @@
   height: 10px;
   background: red;
   transform-origin: 0%;
+}
+
+@layer components {
+  .noise {
+    background-image: url(../public/grain-min.jpg);
+    background-size: contain;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+  }
 }

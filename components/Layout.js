@@ -44,7 +44,7 @@ const Layout = ({ children, path }) => {
           ) : null}
         </div>
         <div
-          className={`h-full min-h-screen w-full bg-slate-50 p-4 transition-all duration-200 ease-in-out dark:bg-zinc-900 md:p-8 lg:ml-0 lg:w-4/5`}
+          className={`dark:lg:noise h-full min-h-screen w-full bg-slate-50 bg-cover p-4 transition-all duration-200 ease-in-out dark:bg-zinc-900 md:p-8 lg:ml-0 lg:w-4/5`}
         >
           <div className="relative mx-auto my-[10vh] flex w-full flex-col gap-y-32 transition-all duration-200 ease-in-out dark:text-zinc-200 md:my-[20vh] lg:max-w-5xl">
             {children}

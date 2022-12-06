@@ -35,7 +35,7 @@ const Category = ({ categoryObject }) => {
       />
       <div className="flex flex-col items-start justify-start gap-8">
         <button
-          className="font-IMB text-sm transition-all duration-200 ease-in-out hover:text-acapulco-600"
+          className="font-mono text-sm transition-all duration-200 ease-in-out hover:text-acapulco-600"
           type="button"
           onClick={() => router.back()}
         >

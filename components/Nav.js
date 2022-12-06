@@ -92,13 +92,11 @@ const Nav = () => {
 
   return (
     <nav
-      className={`sticky top-0 flex h-full w-full justify-between gap-y-8 overscroll-contain bg-white p-4 py-8 text-slate-600 transition-all duration-200 ease-in-out dark:bg-zinc-800 dark:text-zinc-200 md:h-screen md:flex-col md:p-8 ${
-        state.menu
-          ? "h-[100dvh] min-h-screen flex-col shadow-xl md:w-[420px]"
-          : "flex-row md:w-auto"
+      className={`dark:lg:noise sticky top-0 flex h-full w-full justify-between overscroll-contain bg-white text-slate-600 transition-all duration-200 ease-in-out dark:bg-zinc-800 dark:text-zinc-200 md:h-screen md:flex-col ${
+        state.menu ? "h-[100dvh] flex-col md:w-[420px]" : "flex-row md:w-auto"
       }`}
     >
-      <div className="flex w-full flex-none flex-row items-center justify-between">
+      <div className="flex w-full flex-none flex-row items-center justify-between p-4 py-8 md:p-8">
         <Link
           href="/"
           className="flex flex-row items-center justify-center gap-1"
@@ -149,14 +147,14 @@ const Nav = () => {
         </button>
       </div>
       <div
-        className={`mt-4 flex h-full grow flex-col justify-between gap-y-8 ${
-          state.menu ? "" : "hidden lg:flex"
+        className={`flex h-full grow flex-col justify-between gap-y-8 p-4 py-8 pt-0 md:px-8 ${
+          state.menu ? "overflow-y-auto" : "hidden lg:flex"
         }`}
       >
         <div className="flex flex-col items-start justify-center">
-          <p className="mb-2 font-IMB text-sm tracking-wide">Portfolio</p>
+          <p className="mb-2 font-mono text-sm tracking-wide">Portfolio</p>
         </div>
-        <div className="flex flex-col items-start gap-y-2 font-IMB">
+        <div className="flex flex-col items-start gap-y-2 font-mono">
           <p className="mb-4 font-sans text-2xl font-bold text-black dark:text-white">
             Links
           </p>
@@ -185,7 +183,7 @@ const Nav = () => {
             Resume
           </Link>
         </div>
-        <div className="flex flex-col items-start gap-y-2 font-IMB">
+        <div className="flex flex-col items-start gap-y-2 font-mono">
           <p className="mb-4 font-sans text-2xl font-bold text-black dark:text-white">
             Projects
           </p>
@@ -224,7 +222,9 @@ const Nav = () => {
           loading="lazy"
         />
       </div>
-      <div className={`hidden lg:hidden ${state.menu ? "hidden" : "md:block"}`}>
+      <div
+        className={`hidden lg:hidden ${state.menu ? "hidden" : "p-8 md:block"}`}
+      >
         <Image
           src={state.theme === "dark" ? iconWhite : iconBlack}
           alt="Warren Chan Icon"

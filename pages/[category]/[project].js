@@ -1,14 +1,14 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { fetcher } from "../../lib/api";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 // Components
-import CarouselBlock from '../../components/image/CarouselBlock';
-import ImageBlock from '../../components/image/ImageBlock'
+import CarouselBlock from "../../components/image/CarouselBlock";
+import ImageBlock from "../../components/image/ImageBlock";
 import ImageDescriptionBlock from "../../components/image/ImageDescriptionBlock";
 import SubTitle from "../../components/text/SubTitle";
 import BodyText from "../../components/text/BodyText";
@@ -16,140 +16,136 @@ import RichTextField from "../../components/text/RichTextField";
 import PhotoGrid from "../../components/image/PhotoGrid";
 import Button from "../../components/button/Button";
 import Tags from "../../components/tags/Tags";
-import SEOHead from '../../components/seo/SEOHead'
+import SEOHead from "../../components/seo/SEOHead";
 
 const Project = ({ projectObject }) => {
   let project = projectObject.attributes;
-  const router = useRouter()
+  const router = useRouter();
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   useEffect(() => {
-    return scrollYProgress.onChange()
-  }, [])
+    return scrollYProgress.onChange();
+  }, []);
 
   return (
-    <Layout
-      path={project.title}
-    >
-      <SEOHead
-        description={`${project.title} | ${project.description}`}
-    	/>
-      <motion.div className="fixed top-0 left-0 right-0 h-2 z-50 bg-gradient-to-r from-acapulco-300 to-acapulco-500 origin-[0%]"  style={{ scaleX }} />
+    <Layout path={project.title}>
+      <SEOHead description={`${project.title} | ${project.description}`} />
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-50 h-2 origin-[0%] bg-gradient-to-r from-acapulco-300 to-acapulco-500"
+        style={{ scaleX }}
+      />
       <div className="flex flex-col items-start justify-start gap-8 dark:text-slate-200">
-        <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm font-IMB" type="button" onClick={() => router.back()}>
-          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+        <button
+          className="font-mono text-sm transition-all duration-200 ease-in-out hover:text-acapulco-600"
+          type="button"
+          onClick={() => router.back()}
+        >
+          <span>
+            <FontAwesomeIcon icon={faArrowLeft} /> Back
+          </span>
         </button>
-        <h1 className="font-bold text-5xl md:text-6xl dark:text-white">{project.title}</h1>
-        <span className="px-4 py-1 bg-slate-50 dark:bg-slate-50/10 rounded-full border border-acapulco-200 text-xs font-medium text-acapulco-600 font-IMB">{project.category.data.attributes.name}</span>
-        <p className="leading-normal px-4">{project.description}</p>
+        <h1 className="text-5xl font-bold dark:text-white md:text-6xl">
+          {project.title}
+        </h1>
+        <span className="rounded-full border border-acapulco-200 bg-slate-50 px-4 py-1 font-mono text-xs font-medium text-acapulco-600 dark:bg-slate-50/10">
+          {project.category.data.attributes.name}
+        </span>
+        <p className="px-4 leading-normal">{project.description}</p>
       </div>
       {project.blocks.map((block, i) => {
         switch (block.__component) {
           case "images.images":
-            if(block.image.data) {
+            if (block.image.data) {
               return (
                 <div key={i}>
-                  <ImageBlock
-                    imageData={block.image.data.attributes}
-                  />
+                  <ImageBlock imageData={block.image.data.attributes} />
                 </div>
-              )
+              );
             }
             break;
           case "images.image-description":
-            if(block.image.data) {
+            if (block.image.data) {
               return (
                 <div key={i}>
-                  <ImageDescriptionBlock
-                    data={block}
-                  />
+                  <ImageDescriptionBlock data={block} />
                 </div>
-              )
+              );
             }
             break;
           case "images.carousel":
-            var images = block.images.data
-            if(images) {
+            var images = block.images.data;
+            if (images) {
               return (
                 <div key={i}>
-                  <CarouselBlock
-                    imageData={images}
-                  />
+                  <CarouselBlock imageData={images} />
                 </div>
-              )
+              );
             }
             break;
           case "images.photo-grid":
-            var images = block.images.data
-            if(images) {
+            var images = block.images.data;
+            if (images) {
               return (
                 <div key={i}>
-                  <PhotoGrid
-                    imageData={images}
-                  />
+                  <PhotoGrid imageData={images} />
                 </div>
-              )
+              );
             }
             break;
           case "text.sub-title":
             return (
               <div key={i}>
-                <SubTitle
-                  data={block}
-                />
+                <SubTitle data={block} />
               </div>
-            )
+            );
             break;
           case "text.body":
             return (
               <div key={i}>
-                <BodyText
-                  data={block}
-                />
+                <BodyText data={block} />
               </div>
-            )
+            );
             break;
           case "text.rich-text-field":
             return (
               <div key={i}>
-                <RichTextField
-                  data={block}
-                />
+                <RichTextField data={block} />
               </div>
-            )
+            );
             break;
           case "button.button":
             return (
               <div key={i}>
-                <Button
-                  text={block.text}
-                  url={block.url}
-                />
+                <Button text={block.text} url={block.url} />
               </div>
-            )
+            );
             break;
           case "tags.tags":
             return (
               <div key={i}>
-                <Tags
-                  tagData={block}
-                />
+                <Tags tagData={block} />
               </div>
-            )
+            );
             break;
-          default :
-            null
+          default:
+            null;
         }
       })}
       <div className="mb-8 flex flex-col items-start justify-start gap-8">
-        <button className="hover:text-acapulco-600 ease-in-out transition-all duration-200 text-sm font-IMB" type="button" onClick={() => router.back()}>
-          <span><FontAwesomeIcon icon={faArrowLeft} /> Back</span>
+        <button
+          className="font-mono text-sm transition-all duration-200 ease-in-out hover:text-acapulco-600"
+          type="button"
+          onClick={() => router.back()}
+        >
+          <span>
+            <FontAwesomeIcon icon={faArrowLeft} /> Back
+          </span>
         </button>
       </div>
     </Layout>
@@ -158,12 +154,14 @@ const Project = ({ projectObject }) => {
 
 export async function getServerSideProps({ params }) {
   const { project } = params;
-  const projectResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/project/${project}?populate[blocks][populate]=*&populate[category][populate]=*`);
+  const projectResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/slugify/slugs/project/${project}?populate[blocks][populate]=*&populate[category][populate]=*`
+  );
   return {
     props: {
-      projectObject: projectResponse.data
-    }
-  }
+      projectObject: projectResponse.data,
+    },
+  };
 }
 
 export default Project;

@@ -41,7 +41,7 @@ const Home = () => {
         </p>
       </div>
       <div className="flex flex-col gap-4 dark:text-white">
-        <h1 className="mb-4 font-IMB text-6xl font-bold">{`Hello, I'm Warren.`}</h1>
+        <h1 className="mb-4 font-mono text-6xl font-bold">{`Hello, I'm Warren.`}</h1>
         <p></p>
       </div>
       <div className="flex flex-col items-start justify-center gap-y-2 text-sm uppercase tracking-wider text-slate-600 dark:text-zinc-200">
