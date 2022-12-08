@@ -6,7 +6,7 @@ import { Context } from "../lib/context/context";
 import Nav from "./Nav";
 import SEOHead from "../components/seo/SEOHead";
 
-const Layout = ({ children, path }) => {
+const Layout = ({ children, path, className }) => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState("Portfolio");
   const { theme, setTheme } = useTheme();
@@ -36,7 +36,7 @@ const Layout = ({ children, path }) => {
         className={`flex h-full flex-col text-slate-800 dark:text-zinc-200 md:flex-row md:items-stretch`}
       >
         <div
-          className={`sticky top-0 left-0 z-10 w-full transition-all duration-200 ease-in-out md:w-[96px] lg:w-1/5 lg:min-w-[420px]`}
+          className={`fixed top-0 left-0 z-10 w-full transition-all duration-200 ease-in-out md:sticky md:w-[96px] lg:w-1/5 lg:min-w-[420px]`}
         >
           <Nav />
           {state.menu ? (
@@ -44,9 +44,11 @@ const Layout = ({ children, path }) => {
           ) : null}
         </div>
         <div
-          className={`dark:lg:noise h-full min-h-screen w-full bg-slate-50 bg-cover p-4 transition-all duration-200 ease-in-out dark:bg-zinc-900 md:p-8 lg:ml-0 lg:w-4/5`}
+          className={`dark:lg:noise h-full min-h-screen w-full bg-slate-50 bg-cover transition-all duration-200 ease-in-out dark:bg-zinc-900 lg:w-4/5`}
         >
-          <div className="relative mx-auto my-[10vh] flex w-full flex-col gap-y-32 transition-all duration-200 ease-in-out dark:text-zinc-200 md:my-[20vh] lg:max-w-5xl">
+          <div
+            className={`min-w-screen relative mx-auto flex h-full min-h-screen w-full flex-col gap-y-32 transition-all duration-200 ease-in-out dark:text-zinc-200 ${className}`}
+          >
             {children}
           </div>
         </div>

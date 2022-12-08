@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider attribute="class">
         <Provider>
-          <div className={`${inter.className} h-full`}>
+          <div className={`${inter.className} h-full w-full`}>
             <Component {...pageProps} />
             <Analytics />
           </div>

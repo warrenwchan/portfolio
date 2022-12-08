@@ -34,7 +34,10 @@ const Project = ({ projectObject }) => {
   }, []);
 
   return (
-    <Layout path={project.title}>
+    <Layout
+      path={project.title}
+      className="my-[10vh] p-4 md:my-[20vh] md:p-8 lg:max-w-5xl"
+    >
       <SEOHead description={`${project.title} | ${project.description}`} />
       <motion.div
         className="fixed top-0 left-0 right-0 z-50 h-2 origin-[0%] bg-gradient-to-r from-acapulco-300 to-acapulco-500"

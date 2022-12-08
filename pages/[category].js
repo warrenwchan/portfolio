@@ -29,7 +29,10 @@ const Category = ({ categoryObject }) => {
   }
 
   return (
-    <Layout path={categoryObject.attributes.name}>
+    <Layout
+      path={categoryObject.attributes.name}
+      className="my-[10vh] p-4 md:my-[20vh] md:p-8 lg:max-w-5xl"
+    >
       <SEOHead
         description={`Explore my catalog of ${categoryObject.attributes.name} projects.`}
       />
