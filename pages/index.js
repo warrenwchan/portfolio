@@ -6,6 +6,7 @@ import Image from "next/image";
 import SEOHead from "../components/seo/SEOHead";
 import globalMeta from "../seo/globalmeta";
 import Time from "../components/time";
+import Motion from "../components/Motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
@@ -50,12 +51,14 @@ const Home = ({ projectObject }) => {
         </div>
       </div>
       <div className="mx-auto w-full p-4 md:p-8 lg:max-w-5xl">
-        <h2 className="mb-8 font-mono text-4xl font-bold">Recent Projects</h2>
+        <Motion>
+          <h2 className="mb-8 font-mono text-4xl font-bold">Recent Projects</h2>
+        </Motion>
         <div className="grid grid-cols-1 gap-8">
           {projectObject.map((projectData, i) => {
             const project = projectData.attributes;
             return (
-              <div
+              <Motion
                 key={i}
                 className="group rounded-xl px-6 py-4 transition-all duration-500 ease-in-out hover:bg-white hover:dark:bg-zinc-900"
               >
@@ -100,7 +103,7 @@ const Home = ({ projectObject }) => {
                     </div>
                   </div>
                 </Link>
-              </div>
+              </Motion>
             );
           })}
         </div>
