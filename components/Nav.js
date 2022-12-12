@@ -93,7 +93,9 @@ const Nav = () => {
   return (
     <nav
       className={`dark:lg:noise sticky top-0 flex h-full w-full justify-between overscroll-contain bg-white text-slate-600 transition-all duration-200 ease-in-out dark:bg-zinc-800 dark:text-zinc-200 md:h-screen md:flex-col ${
-        state.menu ? "h-[100dvh] flex-col md:w-[420px]" : "flex-row md:w-auto"
+        state.menu
+          ? "h-[100dvh] flex-col md:min-w-[420px]"
+          : "flex-row md:w-auto"
       }`}
     >
       <div className="flex w-full flex-none flex-row items-center justify-between p-4 py-8 md:p-8">
