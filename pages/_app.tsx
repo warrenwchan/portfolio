@@ -7,6 +7,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 import { Provider } from "../lib/context/context";
+import MenuContextProvider from "../lib/context/MenuContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,12 +15,14 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider attribute="class">
-        <Provider>
-          <div className={`${inter.className} h-full w-full`}>
-            <Component {...pageProps} />
-            <Analytics />
-          </div>
-        </Provider>
+        <MenuContextProvider>
+          <Provider>
+            <div className={`${inter.className} h-full w-full`}>
+              <Component {...pageProps} />
+              <Analytics />
+            </div>
+          </Provider>
+        </MenuContextProvider>
       </ThemeProvider>
     </>
   );
