@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
 import { Context } from "../lib/context/context";
 
 import Nav from "./Nav";
@@ -9,15 +8,7 @@ import SEOHead from "../components/seo/SEOHead";
 const Layout = ({ children, path, className }) => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState("Portfolio");
-  const { theme, setTheme } = useTheme();
   const { state, dispatch } = useContext(Context);
-
-  useEffect(() => {
-    dispatch({
-      type: "THEME_TOGGLE",
-      payload: theme,
-    });
-  }, [theme, dispatch]);
 
   useEffect(() => {
     setCurrentPage(path);

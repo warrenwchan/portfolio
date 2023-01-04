@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +20,7 @@ const Nav = () => {
   const [mounted, setMounted] = useState(false);
   const [data, setData] = useState(null);
   const { state, dispatch } = useContext(Context);
+  const { theme, setTheme } = useTheme();
 
   const toggleMenu = () => {
     window.innerWidth < 1024
@@ -228,7 +230,7 @@ const Nav = () => {
         className={`hidden lg:hidden ${state.menu ? "hidden" : "p-8 md:block"}`}
       >
         <Image
-          src={state.theme === "dark" ? iconWhite : iconBlack}
+          src={theme === "dark" ? iconWhite : iconBlack}
           alt="Warren Chan Icon"
           width={24}
           height={24}
