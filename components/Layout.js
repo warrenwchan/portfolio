@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { Context } from "../lib/context/context";
 
-import Nav from "./Nav";
+import Nav from "./navigation/Nav";
 import SEOHead from "../components/seo/SEOHead";
 
 const Layout = ({ children, path, className }) => {

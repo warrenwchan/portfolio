@@ -3,16 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import { useMenuContext } from "../lib/context/MenuContext";
+import { useMenuContext } from "../../lib/context/MenuContext";
 
-import NavButton from "../components/button/NavButton";
-import Footer from "./Footer";
+import NavButton from "./NavButton";
+import LogoButton from "./LogoButton";
+import Footer from "../Footer";
 
-import gradientBlur from "../public/graident_blur.svg";
-import logoBlack from "../public/logo-black.svg";
-import logoWhite from "../public/logo-white.svg";
-import iconBlack from "../public/icon-black.svg";
-import iconWhite from "../public/icon-white.svg";
+import gradientBlur from "../../public/graident_blur.svg";
+import iconBlack from "../../public/icon-black.svg";
+import iconWhite from "../../public/icon-white.svg";
 
 const Nav = () => {
   const router = useRouter();
@@ -85,38 +84,7 @@ const Nav = () => {
           className="flex flex-row items-center justify-center gap-1"
           onClick={() => closeMenu()}
         >
-          <Image
-            src={iconWhite}
-            alt="Warren Chan Icon"
-            width={32}
-            height={32}
-            className="hidden h-8 w-8 p-2 dark:block dark:md:hidden"
-            loading="lazy"
-          />
-          <Image
-            src={iconBlack}
-            alt="Warren Chan Icon"
-            width={32}
-            height={32}
-            className="h-8 w-8 p-2 dark:hidden md:hidden"
-            loading="lazy"
-          />
-          {menuState ? (
-            <div>
-              <Image
-                src={logoWhite}
-                alt="Logo"
-                className="hidden w-20 dark:md:block lg:w-24"
-                loading="lazy"
-              />
-              <Image
-                src={logoBlack}
-                alt="Logo"
-                className="hidden w-20 dark:hidden md:block lg:w-24"
-                loading="lazy"
-              />
-            </div>
-          ) : null}
+          <LogoButton />
         </Link>
         <NavButton />
       </div>
