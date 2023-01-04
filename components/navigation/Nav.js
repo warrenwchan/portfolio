@@ -1,42 +1,24 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faBars } from "@fortawesome/free-solid-svg-icons";
-import { Context } from "../lib/context/context";
+import { useMenuContext } from "../../lib/context/MenuContext";
 
-import Footer from "./Footer";
+import NavButton from "./NavButton";
+import LogoButton from "./LogoButton";
+import Footer from "../Footer";
 
-import gradientBlur from "../public/graident_blur.svg";
-import logoBlack from "../public/logo-black.svg";
-import logoWhite from "../public/logo-white.svg";
-import iconBlack from "../public/icon-black.svg";
-import iconWhite from "../public/icon-white.svg";
+import gradientBlur from "../../public/graident_blur.svg";
+import iconBlack from "../../public/icon-black.svg";
+import iconWhite from "../../public/icon-white.svg";
 
 const Nav = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [data, setData] = useState(null);
-  const { state, dispatch } = useContext(Context);
-
-  const toggleMenu = () => {
-    window.innerWidth < 1024
-      ? dispatch({
-          type: "MENU_TOGGLE",
-          payload: !state.menu,
-        })
-      : null;
-  };
-
-  const toggleMenuClose = () => {
-    window.innerWidth < 1024
-      ? dispatch({
-          type: "MENU_TOGGLE",
-          payload: false,
-        })
-      : null;
-  };
+  const { theme, setTheme } = useTheme();
+  const { menuState, openMenu, closeMenu } = useMenuContext();
 
   useEffect(() => {
     setMounted(true);
@@ -44,39 +26,37 @@ const Nav = () => {
 
   // Checks to see if menu is open, if menu is opened disabled scroll on website.
   useEffect(() => {
-    if (state.menu === true && window.innerWidth < 1024) {
+    if (menuState === true && window.innerWidth < 1024) {
       document.querySelector("html").classList.add("overflow-hidden");
     } else {
       document.querySelector("html").classList.remove("overflow-hidden");
     }
-  }, [state.menu]);
+  }, [menuState]);
 
   // Keep menu toggled if on desktop view.
   useEffect(() => {
-    window.innerWidth >= 1024
-      ? dispatch({ type: "MENU_TOGGLE", payload: true })
-      : dispatch({ type: "MENU_TOGGLE", payload: false });
-  }, [dispatch]);
+    window.innerWidth >= 1024 ? openMenu() : closeMenu();
+  }, []);
 
   // Check if window size has changed, if changed width, close menu. if changed height adapt height.
   useEffect(() => {
     let windowWidth = window.innerWidth;
     window.addEventListener("resize", () => {
       if (windowWidth === window.innerWidth) {
-        if (state.menu === true) {
-          dispatch({ type: "MENU_TOGGLE", payload: true });
+        if (menuState === true) {
+          openMenu();
         }
       } else {
         if (window.innerWidth < 1024) {
-          dispatch({ type: "MENU_TOGGLE", payload: false });
+          closeMenu();
           windowWidth = window.innerWidth;
         } else {
-          dispatch({ type: "MENU_TOGGLE", payload: true });
+          openMenu();
           windowWidth = window.innerWidth;
         }
       }
     });
-  }, []);
+  }, [menuState, openMenu, closeMenu]);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/categories?&populate=projects`)
@@ -93,7 +73,7 @@ const Nav = () => {
   return (
     <nav
       className={`dark:lg:noise sticky top-0 flex h-full w-full justify-between overscroll-contain bg-white text-slate-600 transition-all duration-200 ease-in-out dark:bg-zinc-800 dark:text-zinc-200 md:h-screen md:flex-col ${
-        state.menu
+        menuState
           ? "h-[100dvh] flex-col md:min-w-[420px]"
           : "flex-row md:w-auto"
       }`}
@@ -102,55 +82,15 @@ const Nav = () => {
         <Link
           href="/"
           className="flex flex-row items-center justify-center gap-1"
+          onClick={() => closeMenu()}
         >
-          <Image
-            src={iconWhite}
-            alt="Warren Chan Icon"
-            width={32}
-            height={32}
-            className="hidden h-8 w-8 p-2 dark:block dark:md:hidden"
-            loading="lazy"
-            onClick={() => toggleMenuClose()}
-          />
-          <Image
-            src={iconBlack}
-            alt="Warren Chan Icon"
-            width={32}
-            height={32}
-            className="h-8 w-8 p-2 dark:hidden md:hidden"
-            loading="lazy"
-            onClick={() => toggleMenuClose()}
-          />
-          {state.menu ? (
-            <div>
-              <Image
-                src={logoWhite}
-                alt="Logo"
-                className="hidden w-20 dark:md:block lg:w-24"
-                loading="lazy"
-                onClick={() => toggleMenuClose()}
-              />
-              <Image
-                src={logoBlack}
-                alt="Logo"
-                className="hidden w-20 dark:hidden md:block lg:w-24"
-                loading="lazy"
-                onClick={() => toggleMenuClose()}
-              />
-            </div>
-          ) : null}
+          <LogoButton />
         </Link>
-        <button className="h-8 w-8 lg:hidden" onClick={() => toggleMenu()}>
-          {state.menu ? (
-            <FontAwesomeIcon icon={faTimes} className="transform transition" />
-          ) : (
-            <FontAwesomeIcon icon={faBars} className="transform transition" />
-          )}
-        </button>
+        <NavButton />
       </div>
       <div
         className={`flex h-full grow flex-col justify-between gap-y-8 p-4 py-8 pt-0 md:px-8 ${
-          state.menu ? "overflow-y-auto" : "hidden lg:flex"
+          menuState ? "overflow-y-auto" : "hidden lg:flex"
         }`}
       >
         <div className="flex flex-col items-start justify-center">
@@ -201,7 +141,7 @@ const Nav = () => {
                         ? "font-bold text-acapulco-600"
                         : null
                     }`}
-                    onClick={() => toggleMenu()}
+                    onClick={() => closeMenu()}
                   >
                     <span>
                       {category.id.toLocaleString("en-US", {
@@ -225,10 +165,10 @@ const Nav = () => {
         />
       </div>
       <div
-        className={`hidden lg:hidden ${state.menu ? "hidden" : "p-8 md:block"}`}
+        className={`hidden lg:hidden ${menuState ? "hidden" : "p-8 md:block"}`}
       >
         <Image
-          src={state.theme === "dark" ? iconWhite : iconBlack}
+          src={theme === "dark" ? iconWhite : iconBlack}
           alt="Warren Chan Icon"
           width={24}
           height={24}
