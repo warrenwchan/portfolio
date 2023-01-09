@@ -33,27 +33,16 @@ const Nav = () => {
     }
   }, [menuState]);
 
-  // Keep menu toggled if on desktop view.
-  useEffect(() => {
-    window.innerWidth >= 1024 ? openMenu() : closeMenu();
-  }, []);
-
   // Check if window size has changed, if changed width, close menu. if changed height adapt height.
   useEffect(() => {
     let windowWidth = window.innerWidth;
     window.addEventListener("resize", () => {
-      if (windowWidth === window.innerWidth) {
+      if (window.innerWidth < 1024) {
         if (menuState === true) {
-          openMenu();
+          closeMenu();
         }
       } else {
-        if (window.innerWidth < 1024) {
-          closeMenu();
-          windowWidth = window.innerWidth;
-        } else {
-          openMenu();
-          windowWidth = window.innerWidth;
-        }
+        openMenu();
       }
     });
   }, [menuState, openMenu, closeMenu]);
