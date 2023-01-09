@@ -38,13 +38,20 @@ const Nav = () => {
     let windowWidth = window.innerWidth;
     window.addEventListener("resize", () => {
       if (window.innerWidth < 1024) {
-        if (menuState === true) {
-          closeMenu();
-        }
+        closeMenu();
       } else {
         openMenu();
       }
     });
+  }, [menuState, openMenu, closeMenu]);
+
+  useEffect(() => {
+    let windowWidth = window.innerWidth;
+    if (window.innerWidth < 1024) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   }, [menuState, openMenu, closeMenu]);
 
   useEffect(() => {
